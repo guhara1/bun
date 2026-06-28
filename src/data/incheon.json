@@ -1,0 +1,45 @@
+{
+  "province": "인천",
+  "slug": "incheon",
+  "intro": "인천은 원도심·신도시·공항·도서 지역이 섞여 있어 한 가지 기준으로 묶기 어렵습니다. 송도·청라·검단 신도시, 부평·구월 원도심, 영종·인천공항, 강화·옹진 도서 지역을 구분해 확인해야 정확합니다.",
+  "guGun": [
+    { "name": "중구", "slug": "jung-gu", "focus": "중구는 원도심과 영종·운서·인천공항권이 함께 있습니다. 공항 인접 지역은 사전 예약·이동 기준을 확인하세요." },
+    { "name": "동구", "slug": "dong-gu", "focus": "동구는 인천 원도심 생활권입니다. 정확한 주소와 건물 출입 방식을 확인하세요." },
+    { "name": "미추홀구", "slug": "michuhol-gu", "focus": "미추홀구는 주안·도화·용현 생활권의 원도심입니다. 역세권 기준으로 확인하면 편합니다." },
+    { "name": "연수구", "slug": "yeonsu-gu", "focus": "연수구는 송도국제도시와 연수·원인재 생활권이 있습니다. 송도는 신도시 단지·오피스텔 출입 방식을 확인하세요." },
+    { "name": "남동구", "slug": "namdong-gu", "focus": "남동구는 구월·인천시청·논현 생활권 중심입니다. 도심 역세권 기준으로 확인하세요." },
+    { "name": "부평구", "slug": "bupyeong-gu", "focus": "부평구는 부평역·부평시장·삼산 생활권의 도심형입니다. 역세권 기준 확인이 유용합니다." },
+    { "name": "계양구", "slug": "gyeyang-gu", "focus": "계양구는 계산·작전 생활권 중심입니다. 정확한 동·건물 정보를 함께 확인하세요." },
+    { "name": "서구", "slug": "seo-gu", "focus": "서구는 청라국제도시·검단신도시 신생활권이 있습니다. 신도시 단지형 주거의 출입 방식을 확인하세요." },
+    { "name": "강화군", "slug": "ganghwa-gun", "focus": "강화는 도서·외곽 지역입니다. 사전 예약, 차량 이동 가능 여부, 추가 이동비를 먼저 확인하세요." },
+    { "name": "옹진군", "slug": "ongjin-gun", "focus": "옹진은 도서 지역으로 일반 도심형과 크게 다릅니다. 이동 가능 시간과 사전 예약을 반드시 확인하세요." }
+  ],
+  "reform2026": [
+    { "name": "제물포구", "slug": "jemulpo-gu" },
+    { "name": "영종구", "slug": "yeongjong-gu" },
+    { "name": "서해구", "slug": "seohae-gu" },
+    { "name": "검단구", "slug": "geomdan-gu" }
+  ],
+  "lifeAreas": [
+    { "name": "송도국제도시", "slug": "songdo-international-city" },
+    { "name": "연수·원인재", "slug": "yeonsu-woninjae" },
+    { "name": "구월·인천시청", "slug": "guwol-incheon-cityhall" },
+    { "name": "논현·소래", "slug": "nonhyeon-sorae" },
+    { "name": "주안·도화", "slug": "juan-dohwa" },
+    { "name": "용현·학익", "slug": "yonghyeon-hagik" },
+    { "name": "부평역·부평시장", "slug": "bupyeong-station-market" },
+    { "name": "삼산·부평구청", "slug": "samsan-bupyeong-gu-office" },
+    { "name": "계산·작전", "slug": "gyesan-jakjeon" },
+    { "name": "청라국제도시", "slug": "cheongna-international-city" },
+    { "name": "검단신도시", "slug": "geomdan-newtown" },
+    { "name": "영종·운서", "slug": "yeongjong-unseo" },
+    { "name": "인천공항", "slug": "incheon-airport" },
+    { "name": "강화", "slug": "ganghwa" },
+    { "name": "옹진 도서", "slug": "ongjin-islands" }
+  ],
+  "stations": [
+    { "name": "부평역", "slug": "bupyeong-station" },
+    { "name": "주안역", "slug": "juan-station" },
+    { "name": "인천시청역", "slug": "incheon-cityhall-station" }
+  ]
+}
