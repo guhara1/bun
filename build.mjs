@@ -569,13 +569,25 @@ function plainLen(html) {
   return [...html.replace(/<[^>]+>/g, "").replace(/\s+/g, "")].length;
 }
 
+let seoulDongByGu = {};
 function registerSeoulContent(it) {
   const kind = SEOUL_KIND[it.kind];
   const path = seoulPath(it);
   const crumbs = crumb({ label: "서울", href: "/seoul/" });
-  if (it.kind === "dong") crumbs.push({ label: it.parentName, href: `/seoul/${it.parentSlug}/` });
-  else if (kind.hub) crumbs.push({ label: kind.label, href: kind.hub });
+  if (it.kind === "dong") {
+    const guName = it.parentName || (seoulFacts.gu.find((g) => g.slug === it.parentSlug) || {}).name || "서울";
+    crumbs.push({ label: guName, href: `/seoul/${it.parentSlug}/` });
+  } else if (kind.hub) crumbs.push({ label: kind.label, href: kind.hub });
   crumbs.push({ label: it.name, href: path });
+
+  // 구 페이지에는 소속 행정동 바로가기를 덧붙여 고립을 방지
+  let dongChips = "";
+  if (it.kind === "gu" && seoulDongByGu[it.slug] && seoulDongByGu[it.slug].length) {
+    dongChips = section({
+      tint: true, h2: "대표 행정동 바로가기",
+      inner: chips(seoulDongByGu[it.slug].map((d) => ({ label: d.name, href: `/seoul/${it.slug}/${d.slug}/` }))),
+    });
+  }
 
   const bodyText = it.sections.map((s) => s.html).join(" ");
   const charCount = plainLen(bodyText);
@@ -599,6 +611,7 @@ ${hero({ eyebrow: `서울 · ${kind.label}`, h1: it.h1, lead: it.lead || it.desc
     ${whoHowWhy(it.name)}
   </div>
 </div></section>
+${dongChips}
 ${faqs ? section({ tint: true, h2: "자주 묻는 질문", inner: faqList(it.faqs.map((f) => ({ q: f.q, a: f.a }))) }) : ""}
 ${related}
 ${inquiryCta()}`;
@@ -717,6 +730,11 @@ async function buildSeoul(report) {
   buildSeoulHub();
   for (const k of ["life", "station", "use", "check", "policy"]) buildSeoulSubHub(k);
   const items = await loadSeoulContent();
+  // 구별 행정동 매핑(구 페이지에 행정동 바로가기 추가)
+  seoulDongByGu = {};
+  items.filter((it) => it.kind === "dong").forEach((it) => {
+    (seoulDongByGu[it.parentSlug] ||= []).push({ name: it.name, slug: it.slug });
+  });
   // 유효 경로 집합 구성 → related 내부링크 검증
   validSeoulPaths = new Set(["/seoul/", "/seoul/life/", "/seoul/station/", "/seoul/use/", "/seoul/check/", "/seoul/policy/"]);
   seoulFacts.gu.forEach((g) => validSeoulPaths.add(`/seoul/${g.slug}/`));

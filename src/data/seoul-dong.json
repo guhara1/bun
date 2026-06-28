@@ -1,0 +1,106 @@
+[
+  { "slug": "yeoksam-dong", "name": "역삼동", "gu": "gangnam-gu", "guName": "강남구" },
+  { "slug": "nonhyeon-dong", "name": "논현동", "gu": "gangnam-gu", "guName": "강남구" },
+  { "slug": "samseong-dong", "name": "삼성동", "gu": "gangnam-gu", "guName": "강남구" },
+  { "slug": "cheongdam-dong", "name": "청담동", "gu": "gangnam-gu", "guName": "강남구" },
+  { "slug": "apgujeong-dong", "name": "압구정동", "gu": "gangnam-gu", "guName": "강남구" },
+  { "slug": "sinsa-dong", "name": "신사동", "gu": "gangnam-gu", "guName": "강남구" },
+  { "slug": "daechi-dong", "name": "대치동", "gu": "gangnam-gu", "guName": "강남구" },
+  { "slug": "dogok-dong", "name": "도곡동", "gu": "gangnam-gu", "guName": "강남구" },
+  { "slug": "gaepo-dong", "name": "개포동", "gu": "gangnam-gu", "guName": "강남구" },
+  { "slug": "suseo-dong", "name": "수서동", "gu": "gangnam-gu", "guName": "강남구" },
+  { "slug": "segok-dong", "name": "세곡동", "gu": "gangnam-gu", "guName": "강남구" },
+
+  { "slug": "seocho-dong", "name": "서초동", "gu": "seocho-gu", "guName": "서초구" },
+  { "slug": "banpo-dong", "name": "반포동", "gu": "seocho-gu", "guName": "서초구" },
+  { "slug": "bangbae-dong", "name": "방배동", "gu": "seocho-gu", "guName": "서초구" },
+  { "slug": "yangjae-dong", "name": "양재동", "gu": "seocho-gu", "guName": "서초구" },
+  { "slug": "jamwon-dong", "name": "잠원동", "gu": "seocho-gu", "guName": "서초구" },
+  { "slug": "umyeon-dong", "name": "우면동", "gu": "seocho-gu", "guName": "서초구" },
+
+  { "slug": "jamsil-dong", "name": "잠실동", "gu": "songpa-gu", "guName": "송파구" },
+  { "slug": "bangi-dong", "name": "방이동", "gu": "songpa-gu", "guName": "송파구" },
+  { "slug": "seokchon-dong", "name": "석촌동", "gu": "songpa-gu", "guName": "송파구" },
+  { "slug": "munjeong-dong", "name": "문정동", "gu": "songpa-gu", "guName": "송파구" },
+  { "slug": "garak-dong", "name": "가락동", "gu": "songpa-gu", "guName": "송파구" },
+  { "slug": "ogeum-dong", "name": "오금동", "gu": "songpa-gu", "guName": "송파구" },
+  { "slug": "jangji-dong", "name": "장지동", "gu": "songpa-gu", "guName": "송파구" },
+
+  { "slug": "seogyo-dong", "name": "서교동", "gu": "mapo-gu", "guName": "마포구" },
+  { "slug": "hapjeong-dong", "name": "합정동", "gu": "mapo-gu", "guName": "마포구" },
+  { "slug": "yeonnam-dong", "name": "연남동", "gu": "mapo-gu", "guName": "마포구" },
+  { "slug": "mangwon-dong", "name": "망원동", "gu": "mapo-gu", "guName": "마포구" },
+  { "slug": "gongdeok-dong", "name": "공덕동", "gu": "mapo-gu", "guName": "마포구" },
+  { "slug": "sangam-dong", "name": "상암동", "gu": "mapo-gu", "guName": "마포구" },
+
+  { "slug": "yeouido-dong", "name": "여의도동", "gu": "yeongdeungpo-gu", "guName": "영등포구" },
+  { "slug": "yeongdeungpo-dong", "name": "영등포동", "gu": "yeongdeungpo-gu", "guName": "영등포구" },
+  { "slug": "dangsan-dong", "name": "당산동", "gu": "yeongdeungpo-gu", "guName": "영등포구" },
+  { "slug": "mullae-dong", "name": "문래동", "gu": "yeongdeungpo-gu", "guName": "영등포구" },
+  { "slug": "singil-dong", "name": "신길동", "gu": "yeongdeungpo-gu", "guName": "영등포구" },
+
+  { "slug": "seongsu-dong", "name": "성수동", "gu": "seongdong-gu", "guName": "성동구" },
+  { "slug": "wangsimni-dong", "name": "왕십리", "gu": "seongdong-gu", "guName": "성동구" },
+  { "slug": "haengdang-dong", "name": "행당동", "gu": "seongdong-gu", "guName": "성동구" },
+  { "slug": "oksu-dong", "name": "옥수동", "gu": "seongdong-gu", "guName": "성동구" },
+  { "slug": "geumho-dong", "name": "금호동", "gu": "seongdong-gu", "guName": "성동구" },
+
+  { "slug": "hannam-dong", "name": "한남동", "gu": "yongsan-gu", "guName": "용산구" },
+  { "slug": "itaewon-dong", "name": "이태원동", "gu": "yongsan-gu", "guName": "용산구" },
+  { "slug": "hangangno-dong", "name": "한강로동", "gu": "yongsan-gu", "guName": "용산구" },
+  { "slug": "yongsan-dong", "name": "용산동", "gu": "yongsan-gu", "guName": "용산구" },
+  { "slug": "galwol-dong", "name": "갈월동", "gu": "yongsan-gu", "guName": "용산구" },
+
+  { "slug": "magok-dong", "name": "마곡동", "gu": "gangseo-gu", "guName": "강서구" },
+  { "slug": "balsan-dong", "name": "발산동", "gu": "gangseo-gu", "guName": "강서구" },
+  { "slug": "hwagok-dong", "name": "화곡동", "gu": "gangseo-gu", "guName": "강서구" },
+  { "slug": "deungchon-dong", "name": "등촌동", "gu": "gangseo-gu", "guName": "강서구" },
+  { "slug": "gayang-dong", "name": "가양동", "gu": "gangseo-gu", "guName": "강서구" },
+
+  { "slug": "guro-dong", "name": "구로동", "gu": "guro-gu", "guName": "구로구" },
+  { "slug": "sindorim-dong", "name": "신도림동", "gu": "guro-gu", "guName": "구로구" },
+  { "slug": "gaebong-dong", "name": "개봉동", "gu": "guro-gu", "guName": "구로구" },
+
+  { "slug": "gasan-dong", "name": "가산동", "gu": "geumcheon-gu", "guName": "금천구" },
+  { "slug": "doksan-dong", "name": "독산동", "gu": "geumcheon-gu", "guName": "금천구" },
+  { "slug": "siheung-dong", "name": "시흥동", "gu": "geumcheon-gu", "guName": "금천구" },
+
+  { "slug": "mok-dong", "name": "목동", "gu": "yangcheon-gu", "guName": "양천구" },
+  { "slug": "sinjeong-dong", "name": "신정동", "gu": "yangcheon-gu", "guName": "양천구" },
+  { "slug": "sinwol-dong", "name": "신월동", "gu": "yangcheon-gu", "guName": "양천구" },
+
+  { "slug": "sillim-dong", "name": "신림동", "gu": "gwanak-gu", "guName": "관악구" },
+  { "slug": "bongcheon-dong", "name": "봉천동", "gu": "gwanak-gu", "guName": "관악구" },
+  { "slug": "namhyeon-dong", "name": "남현동", "gu": "gwanak-gu", "guName": "관악구" },
+
+  { "slug": "sadang-dong", "name": "사당동", "gu": "dongjak-gu", "guName": "동작구" },
+  { "slug": "noryangjin-dong", "name": "노량진동", "gu": "dongjak-gu", "guName": "동작구" },
+  { "slug": "heukseok-dong", "name": "흑석동", "gu": "dongjak-gu", "guName": "동작구" },
+  { "slug": "sangdo-dong", "name": "상도동", "gu": "dongjak-gu", "guName": "동작구" },
+
+  { "slug": "hwayang-dong", "name": "화양동", "gu": "gwangjin-gu", "guName": "광진구" },
+  { "slug": "jayang-dong", "name": "자양동", "gu": "gwangjin-gu", "guName": "광진구" },
+  { "slug": "guui-dong", "name": "구의동", "gu": "gwangjin-gu", "guName": "광진구" },
+  { "slug": "gunja-dong", "name": "군자동", "gu": "gwangjin-gu", "guName": "광진구" },
+
+  { "slug": "bulgwang-dong", "name": "불광동", "gu": "eunpyeong-gu", "guName": "은평구" },
+  { "slug": "eungam-dong", "name": "응암동", "gu": "eunpyeong-gu", "guName": "은평구" },
+  { "slug": "yeokchon-dong", "name": "역촌동", "gu": "eunpyeong-gu", "guName": "은평구" },
+  { "slug": "jingwan-dong", "name": "진관동", "gu": "eunpyeong-gu", "guName": "은평구" },
+
+  { "slug": "sanggye-dong", "name": "상계동", "gu": "nowon-gu", "guName": "노원구" },
+  { "slug": "junggye-dong", "name": "중계동", "gu": "nowon-gu", "guName": "노원구" },
+  { "slug": "hagye-dong", "name": "하계동", "gu": "nowon-gu", "guName": "노원구" },
+  { "slug": "gongneung-dong", "name": "공릉동", "gu": "nowon-gu", "guName": "노원구" },
+
+  { "slug": "sangbong-dong", "name": "상봉동", "gu": "jungnang-gu", "guName": "중랑구" },
+  { "slug": "myeonmok-dong", "name": "면목동", "gu": "jungnang-gu", "guName": "중랑구" },
+  { "slug": "mangu-dong", "name": "망우동", "gu": "jungnang-gu", "guName": "중랑구" },
+
+  { "slug": "hyehwa-dong", "name": "혜화동", "gu": "jongno-gu", "guName": "종로구" },
+  { "slug": "pyeongchang-dong", "name": "평창동", "gu": "jongno-gu", "guName": "종로구" },
+
+  { "slug": "myeong-dong", "name": "명동", "gu": "jung-gu", "guName": "중구" },
+  { "slug": "euljiro-dong", "name": "을지로동", "gu": "jung-gu", "guName": "중구" },
+  { "slug": "sindang-dong", "name": "신당동", "gu": "jung-gu", "guName": "중구" }
+]
