@@ -157,12 +157,19 @@
   <url><loc>https://bun-massage.example/seoul/dongdaemun-gu/jeonnong-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/dongdaemun-gu/sinseol-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/dongdaemun-gu/yongdu-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/dongjak-gu/bon-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/dongjak-gu/daebang-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/dongjak-gu/dongjak-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/dongjak-gu/sindaebang-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/jung-gu/euljiro-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/eunpyeong-gu/eungam-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/eunpyeong-gu/daejo-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/eunpyeong-gu/galhyeon-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/eunpyeong-gu/gusan-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/eunpyeong-gu/jeungsan-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/eunpyeong-gu/nokbeon-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/eunpyeong-gu/sinsa-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/eunpyeong-gu/susaek-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/guro-gu/gaebong-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/gangnam-gu/gaepo-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/yongsan-gu/galwol-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
@@ -185,6 +192,9 @@
   <url><loc>https://bun-massage.example/seoul/gangnam-gu/ilwon-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/gangnam-gu/jagok-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/gangnam-gu/yulhyeon-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/gangseo-gu/gonghang-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/gangseo-gu/ujangsan-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/gangseo-gu/yeomchang-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/songpa-gu/garak-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/geumcheon-gu/gasan-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/gangseo-gu/gayang-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
@@ -199,6 +209,7 @@
   <url><loc>https://bun-massage.example/seoul/guro-gu/oryu-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/guro-gu/sugung-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/gwangjin-gu/guui-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/gwangjin-gu/junggok-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/seongdong-gu/haengdang-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/nowon-gu/hagye-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/yongsan-gu/hangangno-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
@@ -221,6 +232,9 @@
   <url><loc>https://bun-massage.example/seoul/jongno-gu/sajik-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/jongno-gu/samcheong-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/nowon-gu/junggye-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/jungnang-gu/junghwa-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/jungnang-gu/muk-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/jungnang-gu/sinnae-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/gangseo-gu/magok-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/jungnang-gu/mangu-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/mapo-gu/mangwon-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
@@ -273,6 +287,11 @@
   <url><loc>https://bun-massage.example/seoul/seongbuk-gu/jongam-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/seongbuk-gu/samseon-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/seongbuk-gu/seongbuk-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/seongdong-gu/eungbong-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/seongdong-gu/majang-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/seongdong-gu/sageun-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/seongdong-gu/songjeong-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/seongdong-gu/yongdap-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/seongdong-gu/seongsu-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/geumcheon-gu/siheung-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/gwanak-gu/sillim-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
@@ -301,6 +320,15 @@
   <url><loc>https://bun-massage.example/seoul/mapo-gu/yeonnam-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/yeongdeungpo-gu/yeouido-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/yongsan-gu/yongsan-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/yongsan-gu/bogwang-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/yongsan-gu/cheongpa-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/yongsan-gu/huam-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/yongsan-gu/hyochang-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/yongsan-gu/ichon-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/yongsan-gu/namyeong-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/yongsan-gu/seobinggo-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/yongsan-gu/wonhyoro-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
+  <url><loc>https://bun-massage.example/seoul/yongsan-gu/yongmun-dong/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/check/address/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/check/building-access/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://bun-massage.example/seoul/check/change-policy/</loc><lastmod>2026-06-28</lastmod><priority>0.7</priority></url>
