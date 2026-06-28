@@ -952,10 +952,13 @@ function buildRegionReform(P) {
     register({
       title: `${r.name}｜${P.name} 2026 행정구역 개편 대응 (준비 중)`,
       description: `${P.name} ${r.name}는 2026 행정구역 개편 대응 준비 중인 안내 페이지입니다`,
-      path: `${P.base}${r.slug}/`, h1: `${r.name} · 2026 개편 대응 (준비 중)`,
+      path: `${P.base}${r.slug}/`, h1: `${r.name} · 2026 행정구역 개편 대응`,
       activeNav: P.base, noindex: true, priority: 0.1, crumbs,
       body: `${breadcrumb(crumbs)}
-${section({ h2: `${r.name} · 준비 중`, inner: `<div class="prose"><div class="notice"><strong>${esc(r.name)}</strong>는 2026년 ${esc(P.name)} 행정구역 개편 대응을 위해 준비 중인 페이지입니다. 개편 시행 이후 정식 안내로 공개됩니다. 현재 가능한 지역은 <a href="${P.base}">${esc(P.name)} 현행 구군 안내</a>에서 확인하세요.</div></div>` })}`,
+${hero({ eyebrow: `${P.name} · 2026 개편 대응`, h1: `${r.name} · 2026 행정구역 개편 대응`, lead: `${r.note || ""} 개편 시행 전까지는 아래 현행 구군·행정동 기준으로 방문을 안내합니다.`, visual: P.key })}
+${section({ h2: `${r.name}는 어떤 지역인가요`, inner: `<div class="prose"><div class="notice"><strong>${esc(r.name)}</strong>는 2026년 ${esc(P.name)} 행정구역 개편으로 신설이 논의되는 행정구입니다. ${esc(r.note || "")} 개편이 시행되기 전까지는 아래 현행 구군과 행정동 기준으로 방문 안내를 확인하세요.</div></div>` })}
+${r.currentAreas && r.currentAreas.length ? section({ tint: true, h2: "현재 이 지역 확인하기 (현행 구군·행정동)", inner: chips(r.currentAreas) }) : ""}
+${inquiryCta()}`,
     });
   }
 }

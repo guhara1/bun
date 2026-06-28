@@ -13,10 +13,32 @@
     { "slug": "ongjin-gun", "name": "옹진군", "type": "도서", "life": ["옹진 도서"], "stations": [], "direction": "도서 지역 이동 시간·사전 예약 필수" }
   ],
   "reform": [
-    { "slug": "jemulpo-gu", "name": "제물포구" },
-    { "slug": "yeongjong-gu", "name": "영종구" },
-    { "slug": "seohae-gu", "name": "서해구" },
-    { "slug": "geomdan-gu", "name": "검단구" }
+    { "slug": "jemulpo-gu", "name": "제물포구", "note": "미추홀구·동구 일대를 중심으로 신설이 논의되는 행정구입니다.", "currentAreas": [
+      { "label": "미추홀구 (현행)", "href": "/incheon/michuhol-gu/" },
+      { "label": "동구 (현행)", "href": "/incheon/dong-gu/" },
+      { "label": "주안동", "href": "/incheon/michuhol-gu/juan-dong/" },
+      { "label": "도화동", "href": "/incheon/michuhol-gu/dohwa-dong/" },
+      { "label": "용현동", "href": "/incheon/michuhol-gu/yonghyeon-dong/" },
+      { "label": "주안·도화 생활권", "href": "/incheon/life/juan-dohwa/" }
+    ] },
+    { "slug": "yeongjong-gu", "name": "영종구", "note": "중구 영종도(영종·운서) 일대를 중심으로 신설이 논의되는 행정구입니다.", "currentAreas": [
+      { "label": "중구 (현행)", "href": "/incheon/jung-gu/" },
+      { "label": "운서동", "href": "/incheon/jung-gu/unseo-dong/" },
+      { "label": "영종·운서 생활권", "href": "/incheon/life/yeongjong-unseo/" },
+      { "label": "인천공항 생활권", "href": "/incheon/life/incheon-airport/" }
+    ] },
+    { "slug": "seohae-gu", "name": "서해구", "note": "중구 원도심·연안 일대를 중심으로 신설이 논의되는 행정구입니다.", "currentAreas": [
+      { "label": "중구 (현행)", "href": "/incheon/jung-gu/" },
+      { "label": "동구 (현행)", "href": "/incheon/dong-gu/" },
+      { "label": "신포동", "href": "/incheon/jung-gu/sinpo-dong/" },
+      { "label": "송림동", "href": "/incheon/dong-gu/songnim-dong/" }
+    ] },
+    { "slug": "geomdan-gu", "name": "검단구", "note": "서구 검단 지역을 중심으로 신설이 논의되는 행정구입니다.", "currentAreas": [
+      { "label": "서구 (현행)", "href": "/incheon/seo-gu/" },
+      { "label": "검단동", "href": "/incheon/seo-gu/geomdan-dong/" },
+      { "label": "가정동", "href": "/incheon/seo-gu/gajeong-dong/" },
+      { "label": "검단신도시 생활권", "href": "/incheon/life/geomdan-newtown/" }
+    ] }
   ],
   "life": [
     { "slug": "songdo-international-city", "name": "송도국제도시", "category": "신도시형", "includes": ["송도1동", "송도2동"], "stations": [], "gu": "yeonsu-gu" },
