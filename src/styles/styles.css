@@ -143,10 +143,11 @@ li { margin-bottom: 0.35em; }
 }
 .site-header__bar {
   display: flex; align-items: center; gap: var(--sp-4);
-  height: 64px;
+  min-height: 64px; flex-wrap: nowrap; max-width: none;
 }
-.brand { display: flex; align-items: center; gap: var(--sp-3); font-weight: 800; color: var(--c-ink); letter-spacing: -0.02em; }
+.brand { display: flex; align-items: center; gap: var(--sp-3); font-weight: 800; color: var(--c-ink); letter-spacing: -0.02em; flex: none; }
 .brand:hover { text-decoration: none; }
+.brand__name { white-space: nowrap; }
 .brand__mark {
   width: 34px; height: 34px; border-radius: 10px; flex: none;
   background: var(--grad-orange); box-shadow: var(--shadow-orange);
@@ -155,10 +156,10 @@ li { margin-bottom: 0.35em; }
 .brand__name { font-size: var(--fs-md); }
 .brand__name span { color: var(--c-orange); }
 .site-nav { margin-left: auto; }
-.site-nav__list { display: flex; flex-wrap: wrap; gap: 2px; list-style: none; margin: 0; padding: 0; }
+.site-nav__list { display: flex; flex-wrap: nowrap; gap: 0; list-style: none; margin: 0; padding: 0; }
 .site-nav__list a {
-  display: block; padding: var(--sp-2) var(--sp-3); border-radius: var(--radius-pill);
-  color: var(--c-text); font-size: var(--fs-sm); font-weight: 600;
+  display: block; padding: 0.5em 0.62em; border-radius: var(--radius-pill);
+  color: var(--c-text); font-size: 0.82rem; font-weight: 600; white-space: nowrap;
 }
 .site-nav__list a:hover { background: var(--c-sand); text-decoration: none; }
 .site-nav__list a[aria-current="page"] { background: var(--c-ink); color: #fff; }
@@ -372,13 +373,17 @@ li { margin-bottom: 0.35em; }
   .hero__visual { order: -1; }
   .hero-visual__svg { max-width: 360px; }
 }
-@media (max-width: 760px) {
+/* 내비가 한 줄에 안 들어가는 폭에서는 햄버거 메뉴로 전환 */
+@media (max-width: 1240px) {
   .site-nav { display: none; position: absolute; top: 64px; left: 0; right: 0;
-    background: var(--c-ivory); border-bottom: 1px solid var(--c-line); padding: var(--sp-4); }
+    background: var(--c-ivory); border-bottom: 1px solid var(--c-line);
+    padding: var(--sp-4); box-shadow: var(--shadow); }
   .site-nav.is-open { display: block; }
-  .site-nav__list { flex-direction: column; gap: 0; }
+  .site-nav__list { flex-direction: column; flex-wrap: wrap; gap: 0; }
   .site-nav__list a { padding: var(--sp-3); border-radius: var(--radius-sm); }
   .site-header .nav-toggle { display: inline-flex; margin-left: auto; }
+}
+@media (max-width: 760px) {
   .header-phone span { display: none; }
   .grid--2, .grid--3, .grid--4 { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
