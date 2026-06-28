@@ -208,8 +208,28 @@ li { margin-bottom: 0.35em; }
   pointer-events: none;
 }
 .hero__inner { position: relative; padding-block: clamp(3rem, 8vw, 6rem); }
-.hero h1 { font-size: clamp(2rem, 5vw, var(--fs-3xl)); color: #fff; max-width: 16ch; }
+.hero--split .hero__inner {
+  display: grid; grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(2rem, 5vw, var(--sp-8)); align-items: center;
+}
+.hero__content { min-width: 0; }
+.hero h1 { font-size: clamp(2rem, 5vw, var(--fs-3xl)); color: #fff; max-width: 18ch; }
 .hero__lead { font-size: var(--fs-md); color: var(--c-text-invert-muted); max-width: 54ch; }
+
+/* 히어로 비주얼 (마사지·스파 일러스트) */
+.hero__visual { position: relative; display: grid; place-items: center; }
+.hero__visual::before {
+  content: ""; position: absolute; inset: -8% -6% -12% -6%;
+  background: radial-gradient(60% 60% at 50% 40%, rgba(255,172,90,0.22), transparent 70%);
+  filter: blur(8px); pointer-events: none;
+}
+.hero-visual__svg {
+  position: relative; width: 100%; max-width: 460px; height: auto; display: block;
+  border-radius: 32px;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.38), inset 0 0 0 1px rgba(255,255,255,0.18);
+  animation: floaty 7s ease-in-out infinite;
+}
+@keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 .hero__cta { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-5); }
 .hero__meta { margin-top: var(--sp-6); display: flex; flex-wrap: wrap; gap: var(--sp-5); color: var(--c-text-invert-muted); font-size: var(--fs-sm); }
 .hero__meta b { color: var(--c-gold-2); }
@@ -348,6 +368,9 @@ li { margin-bottom: 0.35em; }
   .grid--4 { grid-template-columns: repeat(2, 1fr); }
   .grid--3 { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
+  .hero--split .hero__inner { grid-template-columns: 1fr; gap: var(--sp-6); }
+  .hero__visual { order: -1; }
+  .hero-visual__svg { max-width: 360px; }
 }
 @media (max-width: 760px) {
   .site-nav { display: none; position: absolute; top: 64px; left: 0; right: 0;
@@ -362,5 +385,5 @@ li { margin-bottom: 0.35em; }
   .footer-cta { flex-direction: column; align-items: flex-start; }
 }
 @media (prefers-reduced-motion: reduce) {
-  * { scroll-behavior: auto !important; transition: none !important; }
+  * { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
 }

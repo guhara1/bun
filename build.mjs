@@ -70,6 +70,7 @@ ${hero({
       { label: "예약 전 확인", href: "/check/", variant: "btn--invert" },
     ],
     meta: [`전화예약 <b>${site.phone}</b>`, "서비스 지역 · 수도권 전역", "합법 방문형 서비스 안내"],
+    visual: "home",
   })}
 
 ${section({
@@ -150,7 +151,7 @@ ${inquiryCta()}`,
       { label: q.menu, href: `/questions/${q.slug}/` }
     );
     const body = `${breadcrumb(crumbs)}
-${hero({ eyebrow: "자주 묻는 질문", h1: q.h1, lead: q.lead, ctas: [
+${hero({ eyebrow: "자주 묻는 질문", h1: q.h1, lead: q.lead, visual: "questions", ctas: [
       { label: "전화예약 " + site.phone, href: site.phoneHref, variant: "btn--orange" },
       { label: "지역별 안내", href: "/area/", variant: "btn--invert" },
     ] })}
@@ -183,7 +184,7 @@ function buildArea() {
     crumbs: crumb({ label: "지역별 안내", href: "/area/" }),
     priority: 0.9,
     body: `${breadcrumb(crumb({ label: "지역별 안내", href: "/area/" }))}
-${hero({ eyebrow: "지역별 안내", h1: "서울·경기·인천 지역별 안내", lead: "행정구역과 대표 생활권, 지하철역 기준으로 수도권 전 지역을 안내합니다." })}
+${hero({ eyebrow: "지역별 안내", h1: "서울·경기·인천 지역별 안내", lead: "행정구역과 대표 생활권, 지하철역 기준으로 수도권 전 지역을 안내합니다.", visual: "area" })}
 ${inner}
 ${inquiryCta()}`,
   });
@@ -204,7 +205,7 @@ function buildSimpleSection(key, base, label, h1) {
     crumbs: crumb({ label, href: base }),
     priority: 0.8,
     body: `${breadcrumb(crumb({ label, href: base }))}
-${hero({ eyebrow: label, h1, lead: data.intro })}
+${hero({ eyebrow: label, h1, lead: data.intro, visual: key })}
 ${section({ inner: cardGrid(cards, 3) })}
 ${inquiryCta()}`,
   });
@@ -212,7 +213,7 @@ ${inquiryCta()}`,
   for (const item of data.items) {
     const crumbs = crumb({ label, href: base }, { label: item.menu, href: `${base}${item.slug}/` });
     const body = `${breadcrumb(crumbs)}
-${hero({ eyebrow: label, h1: item.h1, lead: item.lead })}
+${hero({ eyebrow: label, h1: item.h1, lead: item.lead, visual: key })}
 ${section({ h2: "확인 포인트", inner: `<div class="prose">${checklist(item.points)}</div>` })}
 ${section({ tint: true, h2: "함께 확인하면 좋은 안내", inner: chips([
       { label: "질문으로 찾기", href: "/questions/" },
@@ -248,7 +249,7 @@ function buildLifeHub() {
     crumbs: crumb({ label: "생활권", href: "/life/" }),
     priority: 0.8,
     body: `${breadcrumb(crumb({ label: "생활권", href: "/life/" }))}
-${hero({ eyebrow: "생활권", h1: "수도권 주요 생활권", lead: "행정구역보다 생활권 기준으로 위치를 확인하면 빠릅니다." })}
+${hero({ eyebrow: "생활권", h1: "수도권 주요 생활권", lead: "행정구역보다 생활권 기준으로 위치를 확인하면 빠릅니다.", visual: "life" })}
 ${inner}
 ${inquiryCta()}`,
   });
@@ -273,7 +274,7 @@ function buildStationHub() {
     crumbs: crumb({ label: "지하철역", href: "/station/" }),
     priority: 0.7,
     body: `${breadcrumb(crumb({ label: "지하철역", href: "/station/" }))}
-${hero({ eyebrow: "지하철역", h1: "수도권 지하철역 안내", lead: "역명은 위치 설명용이며, 실제 예약은 정확한 주소와 건물 출입 방식으로 확인합니다. 출구별·노선별 구분은 사용하지 않습니다." })}
+${hero({ eyebrow: "지하철역", h1: "수도권 지하철역 안내", lead: "역명은 위치 설명용이며, 실제 예약은 정확한 주소와 건물 출입 방식으로 확인합니다. 출구별·노선별 구분은 사용하지 않습니다.", visual: "station" })}
 ${inner}
 ${inquiryCta()}`,
   });
@@ -299,7 +300,7 @@ function buildProvince(key) {
     crumbs: crumb({ label: provLabel, href: `/${key}/` }),
     priority: 0.9,
     body: `${breadcrumb(crumb({ label: provLabel, href: `/${key}/` }))}
-${hero({ eyebrow: `${provLabel} 지역 안내`, h1: `${provLabel} 출장마사지 · 질문별 지역 안내`, lead: prov.intro, ctas: [
+${hero({ eyebrow: `${provLabel} 지역 안내`, h1: `${provLabel} 출장마사지 · 질문별 지역 안내`, lead: prov.intro, visual: key, ctas: [
       { label: "질문으로 찾기", href: "/questions/", variant: "btn--orange" },
       { label: "예약 전 확인", href: "/check/", variant: "btn--invert" },
     ] })}
@@ -314,7 +315,7 @@ ${inquiryCta()}`,
   for (const u of units) {
     const crumbs = crumb({ label: provLabel, href: `/${key}/` }, { label: u.name, href: `/${key}/${u.slug}/` });
     const body = `${breadcrumb(crumbs)}
-${hero({ eyebrow: `${provLabel} ${u.name}`, h1: `${u.name} 출장마사지 · 질문별 안내`, lead: u.focus })}
+${hero({ eyebrow: `${provLabel} ${u.name}`, h1: `${u.name} 출장마사지 · 질문별 안내`, lead: u.focus, visual: key })}
 ${section({ h2: "이 지역 개요", inner: `<div class="prose"><p class="muted">${u.focus} ${prov.intro}</p></div>` })}
 ${section({ tint: true, h2: "이 지역에서 자주 묻는 질문", inner: cardGrid(questions.items.slice(0, 4).map((q) => ({ title: q.menu, desc: q.lead, href: `/questions/${q.slug}/`, tag: "질문" })), 2) })}
 ${section({ h2: "가까운 생활권·역", inner: chips([
@@ -351,7 +352,7 @@ ${section({ h2: `${r.name} · 준비 중`, inner: `<div class="prose"><div class
   for (const l of prov.lifeAreas) {
     const crumbs = crumb({ label: provLabel, href: `/${key}/` }, { label: "생활권", href: "/life/" }, { label: l.name, href: `/${key}/life/${l.slug}/` });
     const body = `${breadcrumb(crumbs)}
-${hero({ eyebrow: `${provLabel} 생활권`, h1: `${l.name} 생활권 안내`, lead: `${l.name} 생활권의 방문 기준을 자주 묻는 질문·이용 장소·예약 전 확인 순으로 안내합니다.` })}
+${hero({ eyebrow: `${provLabel} 생활권`, h1: `${l.name} 생활권 안내`, lead: `${l.name} 생활권의 방문 기준을 자주 묻는 질문·이용 장소·예약 전 확인 순으로 안내합니다.`, visual: key })}
 ${section({ h2: "이 생활권에서 자주 묻는 질문", inner: cardGrid(questions.items.slice(0, 4).map((q) => ({ title: q.menu, desc: q.lead, href: `/questions/${q.slug}/`, tag: "질문" })), 2) })}
 ${section({ tint: true, h2: "이용 장소별 기준", inner: chips(content.use.items.map((i) => ({ label: i.menu, href: `/use/${i.slug}/` }))) })}
 ${section({ h2: "예약 전 체크리스트", inner: `<div class="prose">${checklist(STANDARD_CHECKLIST)}</div>` })}
@@ -378,7 +379,7 @@ ${inquiryCta()}`;
     crumbs: crumb({ label: provLabel, href: `/${key}/` }, { label: "역세권", href: `/${key}/station/` }),
     priority: 0.6,
     body: `${breadcrumb(crumb({ label: provLabel, href: `/${key}/` }, { label: "역세권", href: `/${key}/station/` }))}
-${hero({ eyebrow: `${provLabel} 역세권`, h1: `${provLabel} 역세권 안내`, lead: "역명은 위치 설명용입니다. 출구별·노선별 페이지는 만들지 않으며, 역명 기준 1개 안내만 제공합니다." })}
+${hero({ eyebrow: `${provLabel} 역세권`, h1: `${provLabel} 역세권 안내`, lead: "역명은 위치 설명용입니다. 출구별·노선별 페이지는 만들지 않으며, 역명 기준 1개 안내만 제공합니다.", visual: "station" })}
 ${section({ inner: chips(prov.stations.map((s) => ({ label: s.name, href: `/${key}/station/${s.slug}/` }))) })}
 ${inquiryCta()}`,
   });
@@ -390,7 +391,7 @@ ${inquiryCta()}`,
       path: `/${key}/station/${s.slug}/`, h1: `${s.name} 기준 안내`,
       activeNav: `/${key}/`, crumbs, priority: 0.5,
       body: `${breadcrumb(crumbs)}
-${hero({ eyebrow: `${provLabel} 역세권`, h1: `${s.name} 기준 안내`, lead: `${s.name}을(를) 기준으로 위치를 설명합니다. 실제 예약 가능 여부는 정확한 방문 주소와 건물 출입 방식으로 확인하세요.` })}
+${hero({ eyebrow: `${provLabel} 역세권`, h1: `${s.name} 기준 안내`, lead: `${s.name}을(를) 기준으로 위치를 설명합니다. 실제 예약 가능 여부는 정확한 방문 주소와 건물 출입 방식으로 확인하세요.`, visual: "station" })}
 ${section({ h2: "확인 포인트", inner: `<div class="prose">${checklist(["가까운 역 기준 위치 확인", "출구 번호 대신 실제 주소 사용", "건물 출입 방식 확인", "환승역도 노선 구분 없이 안내"])}</div>` })}
 ${section({ tint: true, h2: "관련 안내", inner: chips([
         { label: `${provLabel} 전체`, href: `/${key}/` },
@@ -414,7 +415,7 @@ function buildContact() {
     crumbs: crumb({ label: "문의하기", href: "/contact/" }),
     priority: 0.7,
     body: `${breadcrumb(crumb({ label: "문의하기", href: "/contact/" }))}
-${hero({ eyebrow: "문의", h1: "문의하기", lead: "예약은 전화로, 웹사이트 제작과 제휴는 텔레그램으로 문의하세요.", ctas: [
+${hero({ eyebrow: "문의", h1: "문의하기", lead: "예약은 전화로, 웹사이트 제작과 제휴는 텔레그램으로 문의하세요.", visual: "contact", ctas: [
       { label: "전화예약 " + site.phone, href: site.phoneHref, variant: "btn--orange" },
       { label: "웹사이트 제작문의", href: site.telegram.website, variant: "btn--gold" },
       { label: "제휴문의", href: site.telegram.partnership, variant: "btn--invert" },
@@ -438,7 +439,7 @@ function buildPolicy() {
     crumbs: crumb({ label: "운영 기준", href: "/policy/" }),
     priority: 0.5,
     body: `${breadcrumb(crumb({ label: "운영 기준", href: "/policy/" }))}
-${hero({ eyebrow: "운영 기준", h1: "운영 기준", lead: data.intro })}
+${hero({ eyebrow: "운영 기준", h1: "운영 기준", lead: data.intro, visual: "policy" })}
 ${section({ inner: cardGrid(cards, 3) })}
 ${inquiryCta()}`,
   });
@@ -448,7 +449,7 @@ ${inquiryCta()}`,
       title: item.title, description: item.desc, path: `/policy/${item.slug}/`, h1: item.h1,
       activeNav: "/policy/", crumbs, priority: 0.4,
       body: `${breadcrumb(crumbs)}
-${hero({ eyebrow: "운영 기준", h1: item.h1, lead: item.lead })}
+${hero({ eyebrow: "운영 기준", h1: item.h1, lead: item.lead, visual: "policy" })}
 ${section({ inner: `<div class="prose">${checklist(item.points)}</div>` })}`,
     });
   }

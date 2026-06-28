@@ -1,5 +1,6 @@
 // 재사용 UI 컴포넌트 (HTML 문자열 반환)
 import { esc, site } from "./layout.mjs";
+import { heroVisual } from "./visuals.mjs";
 
 export function breadcrumb(crumbs) {
   const items = crumbs
@@ -15,7 +16,7 @@ export function breadcrumb(crumbs) {
   return `<nav class="breadcrumb container" aria-label="경로"><ol>${items}</ol></nav>`;
 }
 
-export function hero({ eyebrow, h1, lead, ctas = [], meta = [] }) {
+export function hero({ eyebrow, h1, lead, ctas = [], meta = [], visual }) {
   const cta = ctas
     .map(
       (c) =>
@@ -27,14 +28,22 @@ export function hero({ eyebrow, h1, lead, ctas = [], meta = [] }) {
         .map((m) => `<span>${m}</span>`)
         .join("")}</div>`
     : "";
+  const content = `
+    <div class="hero__content">
+      ${eyebrow ? `<span class="eyebrow" style="color:var(--c-gold-2)">${esc(eyebrow)}</span>` : ""}
+      <h1>${esc(h1)}</h1>
+      ${lead ? `<p class="hero__lead">${esc(lead)}</p>` : ""}
+      ${cta ? `<div class="hero__cta">${cta}</div>` : ""}
+      ${metaHtml}
+    </div>`;
+  const visualHtml = visual
+    ? `<div class="hero__visual" aria-hidden="false">${heroVisual(visual)}</div>`
+    : "";
   return `
-<section class="hero">
+<section class="hero${visual ? " hero--split" : ""}">
   <div class="container hero__inner">
-    ${eyebrow ? `<span class="eyebrow" style="color:var(--c-gold-2)">${esc(eyebrow)}</span>` : ""}
-    <h1>${esc(h1)}</h1>
-    ${lead ? `<p class="hero__lead">${esc(lead)}</p>` : ""}
-    ${cta ? `<div class="hero__cta">${cta}</div>` : ""}
-    ${metaHtml}
+    ${content}
+    ${visualHtml}
   </div>
 </section>`;
 }
