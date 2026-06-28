@@ -1,0 +1,43 @@
+{
+  "intro": "인천은 원도심·신도시·공항·도서 지역이 섞여 있어 한 가지 기준으로 묶기 어렵습니다. 송도·청라·검단 신도시, 부평·구월 원도심, 영종·인천공항, 강화·옹진 도서 지역을 구분해 확인해야 정확합니다.",
+  "gu": [
+    { "slug": "jung-gu", "name": "중구", "type": "원도심·공항권", "life": ["영종·운서", "인천공항"], "stations": [], "direction": "원도심과 영종·인천공항권 구분" },
+    { "slug": "dong-gu", "name": "동구", "type": "원도심", "life": ["주안·도화"], "stations": [], "direction": "인천 원도심 생활권" },
+    { "slug": "michuhol-gu", "name": "미추홀구", "type": "원도심·역세권", "life": ["주안·도화", "용현·학익"], "stations": ["주안역"], "direction": "주안·도화·용현 원도심 역세권" },
+    { "slug": "yeonsu-gu", "name": "연수구", "type": "신도시·주거", "life": ["송도국제도시", "연수·원인재"], "stations": [], "direction": "송도 신도시와 연수·원인재 생활권" },
+    { "slug": "namdong-gu", "name": "남동구", "type": "도심·역세권", "life": ["구월·인천시청", "논현·소래"], "stations": ["인천시청역"], "direction": "구월·인천시청·논현 도심 역세권" },
+    { "slug": "bupyeong-gu", "name": "부평구", "type": "도심·역세권", "life": ["부평역·부평시장", "삼산·부평구청"], "stations": ["부평역"], "direction": "부평역·삼산 도심 역세권" },
+    { "slug": "gyeyang-gu", "name": "계양구", "type": "주거", "life": ["계산·작전"], "stations": [], "direction": "계산·작전 생활권" },
+    { "slug": "seo-gu", "name": "서구", "type": "신도시", "life": ["청라국제도시", "검단신도시"], "stations": [], "direction": "청라·검단 신도시 생활권" },
+    { "slug": "ganghwa-gun", "name": "강화군", "type": "도서·외곽", "life": ["강화"], "stations": [], "direction": "도서·외곽 사전 예약·이동 기준" },
+    { "slug": "ongjin-gun", "name": "옹진군", "type": "도서", "life": ["옹진 도서"], "stations": [], "direction": "도서 지역 이동 시간·사전 예약 필수" }
+  ],
+  "reform": [
+    { "slug": "jemulpo-gu", "name": "제물포구" },
+    { "slug": "yeongjong-gu", "name": "영종구" },
+    { "slug": "seohae-gu", "name": "서해구" },
+    { "slug": "geomdan-gu", "name": "검단구" }
+  ],
+  "life": [
+    { "slug": "songdo-international-city", "name": "송도국제도시", "category": "신도시형", "includes": ["송도1동", "송도2동"], "stations": [], "gu": "yeonsu-gu" },
+    { "slug": "yeonsu-woninjae", "name": "연수·원인재", "category": "원도심형", "includes": ["연수동", "원인재"], "stations": [], "gu": "yeonsu-gu" },
+    { "slug": "guwol-incheon-cityhall", "name": "구월·인천시청", "category": "도심·역세권형", "includes": ["구월동"], "stations": ["인천시청역"], "gu": "namdong-gu" },
+    { "slug": "nonhyeon-sorae", "name": "논현·소래", "category": "도심·역세권형", "includes": ["논현동", "소래"], "stations": [], "gu": "namdong-gu" },
+    { "slug": "juan-dohwa", "name": "주안·도화", "category": "원도심형", "includes": ["주안동", "도화동"], "stations": ["주안역"], "gu": "michuhol-gu" },
+    { "slug": "yonghyeon-hagik", "name": "용현·학익", "category": "원도심형", "includes": ["용현동", "학익동"], "stations": [], "gu": "michuhol-gu" },
+    { "slug": "bupyeong-station-market", "name": "부평역·부평시장", "category": "도심·역세권형", "includes": ["부평동"], "stations": ["부평역"], "gu": "bupyeong-gu" },
+    { "slug": "samsan-bupyeong-gu-office", "name": "삼산·부평구청", "category": "도심·역세권형", "includes": ["삼산동"], "stations": [], "gu": "bupyeong-gu" },
+    { "slug": "gyesan-jakjeon", "name": "계산·작전", "category": "주거형", "includes": ["계산동", "작전동"], "stations": [], "gu": "gyeyang-gu" },
+    { "slug": "cheongna-international-city", "name": "청라국제도시", "category": "신도시형", "includes": ["청라1동", "청라2동"], "stations": [], "gu": "seo-gu" },
+    { "slug": "geomdan-newtown", "name": "검단신도시", "category": "신도시형", "includes": ["검단"], "stations": [], "gu": "seo-gu" },
+    { "slug": "yeongjong-unseo", "name": "영종·운서", "category": "공항·도서형", "includes": ["영종동", "운서동"], "stations": [], "gu": "jung-gu" },
+    { "slug": "incheon-airport", "name": "인천공항", "category": "공항·도서형", "includes": ["인천국제공항"], "stations": [], "gu": "jung-gu" },
+    { "slug": "ganghwa", "name": "강화", "category": "공항·도서형", "includes": ["강화읍"], "stations": [], "gu": "ganghwa-gun" },
+    { "slug": "ongjin-islands", "name": "옹진 도서", "category": "공항·도서형", "includes": ["영흥도", "백령도"], "stations": [], "gu": "ongjin-gun" }
+  ],
+  "station": [
+    { "slug": "bupyeong-station", "name": "부평역", "gu": "bupyeong-gu", "life": ["부평역·부평시장"] },
+    { "slug": "juan-station", "name": "주안역", "gu": "michuhol-gu", "life": ["주안·도화"] },
+    { "slug": "incheon-cityhall-station", "name": "인천시청역", "gu": "namdong-gu", "life": ["구월·인천시청"] }
+  ]
+}

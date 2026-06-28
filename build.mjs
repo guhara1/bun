@@ -17,15 +17,26 @@ import incheon from "./src/data/incheon.json" with { type: "json" };
 import questions from "./src/data/questions.json" with { type: "json" };
 import content from "./src/data/content.json" with { type: "json" };
 import seoulFacts from "./src/data/seoul-facts.json" with { type: "json" };
+import gyeonggiFacts from "./src/data/gyeonggi-facts.json" with { type: "json" };
+import incheonFacts from "./src/data/incheon-facts.json" with { type: "json" };
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT = join(__dirname, "dist");
 const provinces = { seoul, gyeonggi, incheon };
 
-// 서울 목록을 facts 기준으로 동기화 → 사이트 전역 허브의 내부링크가 생성 페이지와 일치
+// 각 지역 목록을 facts 기준으로 동기화 → 사이트 전역 허브의 내부링크가 생성 페이지와 일치
 seoul.districts = seoulFacts.gu.map((g) => ({ name: g.name, slug: g.slug, focus: g.direction }));
 seoul.lifeAreas = seoulFacts.life.map((l) => ({ name: l.name, slug: l.slug }));
 seoul.stations = seoulFacts.station.slice(0, 6).map((s) => ({ name: s.name, slug: s.slug }));
+
+gyeonggi.cities = gyeonggiFacts.gu.map((g) => ({ name: g.name, slug: g.slug, focus: g.direction }));
+gyeonggi.lifeAreas = gyeonggiFacts.life.map((l) => ({ name: l.name, slug: l.slug }));
+gyeonggi.stations = gyeonggiFacts.station.slice(0, 4).map((s) => ({ name: s.name, slug: s.slug }));
+
+incheon.guGun = incheonFacts.gu.map((g) => ({ name: g.name, slug: g.slug, focus: g.direction }));
+incheon.lifeAreas = incheonFacts.life.map((l) => ({ name: l.name, slug: l.slug }));
+incheon.stations = incheonFacts.station.slice(0, 3).map((s) => ({ name: s.name, slug: s.slug }));
+incheon.reform2026 = incheonFacts.reform;
 
 const pages = []; // { path, html, noindex, priority }
 const longClampWarnings = [];
@@ -504,6 +515,13 @@ const OG_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630
 
 const OG_SEOUL = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><defs><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a231d"/><stop offset="1" stop-color="#161210"/></linearGradient><linearGradient id="o" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff9d4d"/><stop offset="1" stop-color="#cf4708"/></linearGradient><linearGradient id="s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b29c86"/><stop offset="1" stop-color="#6f5f51"/></linearGradient></defs><rect width="1200" height="630" fill="url(#b)"/><circle cx="1000" cy="120" r="300" fill="url(#o)" opacity="0.16"/><g transform="translate(980,330)"><ellipse cx="0" cy="120" rx="120" ry="26" fill="url(#s)"/><ellipse cx="0" cy="70" rx="96" ry="22" fill="url(#s)"/><ellipse cx="0" cy="28" rx="72" ry="18" fill="url(#s)"/><ellipse cx="0" cy="-6" rx="48" ry="14" fill="url(#s)"/><path d="M0 -20 C18 -34 28 -54 28 -70 C12 -64 2 -44 0 -20 Z" fill="#9aa861"/></g><rect x="80" y="250" width="64" height="64" rx="16" fill="url(#o)"/><text x="170" y="298" font-family="Pretendard, sans-serif" font-size="44" font-weight="800" fill="#fff">Bun 마사지</text><text x="80" y="400" font-family="Pretendard, sans-serif" font-size="60" font-weight="800" fill="#fff">서울 출장마사지</text><text x="80" y="470" font-family="Pretendard, sans-serif" font-size="38" font-weight="600" fill="#c2a062">생활권별 방문 가능 지역 안내</text><text x="80" y="545" font-family="Pretendard, sans-serif" font-size="32" fill="#c5bcae">전화예약 0508-202-4719</text></svg>`;
 
+function ogRegion(title, sub, motif) {
+  const el = motif === "wave"
+    ? `<g transform="translate(980,360)"><path d="M-150 20 C -60 -10 20 40 110 10 S 200 0 210 16 L210 130 L-150 130 Z" fill="#8db9d4"/><path d="M-150 56 C -60 30 40 78 130 48 S 210 44 210 56 L210 130 L-150 130 Z" fill="#5f97bd"/></g>`
+    : `<g transform="translate(980,330) rotate(16)"><path d="M0 150 C -100 110 -100 -110 0 -150 C 100 -110 100 110 0 150 Z" fill="#5fae7e"/><path d="M0 150 L0 -150" stroke="#2c6b48" stroke-width="4"/></g>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><defs><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a231d"/><stop offset="1" stop-color="#161210"/></linearGradient><linearGradient id="o" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff9d4d"/><stop offset="1" stop-color="#cf4708"/></linearGradient></defs><rect width="1200" height="630" fill="url(#b)"/><circle cx="1000" cy="120" r="300" fill="url(#o)" opacity="0.14"/>${el}<rect x="80" y="250" width="64" height="64" rx="16" fill="url(#o)"/><text x="170" y="298" font-family="Pretendard, sans-serif" font-size="44" font-weight="800" fill="#fff">Bun 마사지</text><text x="80" y="400" font-family="Pretendard, sans-serif" font-size="60" font-weight="800" fill="#fff">${title}</text><text x="80" y="470" font-family="Pretendard, sans-serif" font-size="38" font-weight="600" fill="#c2a062">${sub}</text><text x="80" y="545" font-family="Pretendard, sans-serif" font-size="32" fill="#c5bcae">전화예약 0508-202-4719</text></svg>`;
+}
+
 const FAVICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8a2b"/><stop offset="1" stop-color="#cf4708"/></linearGradient></defs><rect width="32" height="32" rx="8" fill="url(#g)"/><text x="16" y="23" font-family="sans-serif" font-size="20" font-weight="900" fill="#fff" text-anchor="middle">B</text></svg>`;
 
 // ---------------------------------------------------------------------------
@@ -745,6 +763,231 @@ async function buildSeoul(report) {
   }
 }
 
+// ===========================================================================
+// 경기·인천 — 서울과 동일한 콘텐츠 파일 기반 상세페이지 (province 범용)
+// ===========================================================================
+const REGION_KIND = {
+  gu:      { label: "지역별 안내" },
+  dong:    { label: "행정동" },
+  life:    { label: "생활권",   hub: "life",    visual: "life" },
+  station: { label: "지하철역", hub: "station", visual: "station" },
+};
+
+function regionPath(P, it) {
+  switch (it.kind) {
+    case "gu": return `${P.base}${it.slug}/`;
+    case "dong": return `${P.base}${it.parentSlug}/${it.slug}/`;
+    default: return `${P.base}${it.kind}/${it.slug}/`;
+  }
+}
+
+function whoHowWhyP(name, provName) {
+  return `
+  <div class="answer-block">
+    <h3>Who · How · Why</h3>
+    <p><strong>Who.</strong> 이 안내는 Bun 마사지 운영팀의 ${esc(provName)} 지역 콘텐츠 담당자가 작성하고 운영 책임자가 검수합니다.</p>
+    <p><strong>How.</strong> ${esc(provName)} 행정구역, 주요 생활권, 지하철역, 자택·호텔·오피스텔 등 이용 장소별 예약 전 확인사항을 기준으로 ${esc(name)} 정보를 정리했습니다.</p>
+    <p><strong>Why.</strong> ${esc(provName)}에서 방문형 관리 서비스를 찾는 이용자가 자신의 지역과 이용 장소를 정확하고 안전하게 확인하도록 돕기 위해 작성했습니다.</p>
+    <p class="muted" style="font-size:var(--fs-xs)">작성·검수 · Bun 마사지 운영팀 · 최종 점검 ${new Date().toISOString().slice(0,10)}</p>
+  </div>`;
+}
+
+function makeFilterRelated(P, validSet) {
+  return (related) => {
+    if (!related) return [{ label: `${P.name} 전체 안내`, href: P.base }];
+    const seen = new Set();
+    const ok = related.filter((r) => {
+      if (!r || !r.href) return false;
+      let h = r.href; if (!h.endsWith("/")) h += "/";
+      if (seen.has(h)) return false; seen.add(h);
+      if (h.startsWith(P.base)) return validSet.has(h);
+      return true; // 타 지역/공용 허브 링크는 통과
+    });
+    return ok.length ? ok : [{ label: `${P.name} 전체 안내`, href: P.base }, { label: "지역별 안내", href: "/area/" }];
+  };
+}
+
+function registerRegionContent(P, it, filterRel, dongByGu) {
+  const kind = REGION_KIND[it.kind];
+  const path = regionPath(P, it);
+  const crumbs = crumb({ label: P.name, href: P.base });
+  if (it.kind === "dong") {
+    const guName = it.parentName || (P.facts.gu.find((g) => g.slug === it.parentSlug) || {}).name || P.name;
+    crumbs.push({ label: guName, href: `${P.base}${it.parentSlug}/` });
+  } else if (kind.hub) crumbs.push({ label: kind.label, href: `${P.base}${kind.hub}/` });
+  crumbs.push({ label: it.name, href: path });
+
+  let dongChips = "";
+  if (it.kind === "gu" && dongByGu[it.slug] && dongByGu[it.slug].length) {
+    dongChips = section({
+      tint: true, h2: "대표 행정동 바로가기",
+      inner: chips(dongByGu[it.slug].map((d) => ({ label: d.name, href: `${P.base}${it.slug}/${d.slug}/` }))),
+    });
+  }
+
+  const charCount = plainLen(it.sections.map((s) => s.html).join(" "));
+  const noindex = charCount < 1700;
+  const sectionsHtml = it.sections.map((s) => `<h2>${esc(s.h2)}</h2>${s.html}`).join("\n");
+  const relatedLinks = filterRel(it.related);
+  const related = relatedLinks.length ? section({ tint: true, h2: "관련 지역 보기", inner: chips(relatedLinks) }) : "";
+  const faqs = it.faqs && it.faqs.length;
+  const visual = kind.visual || P.key;
+
+  const body = `${breadcrumb(crumbs)}
+${hero({ eyebrow: `${P.name} · ${kind.label}`, h1: it.h1, lead: it.lead || it.desc, visual })}
+<section class="section"><div class="container">
+  <div class="content prose">
+    ${sectionsHtml}
+    ${whoHowWhyP(it.name, P.name)}
+  </div>
+</div></section>
+${dongChips}
+${faqs ? section({ tint: true, h2: "자주 묻는 질문", inner: faqList(it.faqs.map((f) => ({ q: f.q, a: f.a }))) }) : ""}
+${related}
+${inquiryCta()}`;
+
+  register({
+    title: it.title, description: it.desc, path, h1: it.h1,
+    activeNav: P.base, image: P.og, crumbs,
+    faqs: faqs ? it.faqs : undefined, noindex,
+    priority: it.kind === "gu" ? 0.8 : 0.7, body,
+  });
+  return { path, charCount, noindex };
+}
+
+function buildRegionHub(P) {
+  const guCards = P.facts.gu.map((g) => ({
+    title: g.name, tag: g.type,
+    desc: `대표 생활권 ${(g.life || []).slice(0, 3).join(", ")}${g.stations && g.stations.length ? ` · 가까운 역 ${g.stations.slice(0, 2).join(", ")}` : ""}`,
+    href: `${P.base}${g.slug}/`,
+  }));
+  const lifeByCat = {};
+  for (const l of P.facts.life) (lifeByCat[l.category || "주요 생활권"] ||= []).push(l);
+  const lifeSections = Object.entries(lifeByCat)
+    .map(([cat, arr]) => `<h3>${esc(cat)}</h3>${chips(arr.map((l) => ({ label: l.name, href: `${P.base}life/${l.slug}/` })))}`)
+    .join("");
+  const reformChips = P.facts.reform && P.facts.reform.length
+    ? section({ h2: "2026 개편 대응", lead: "행정구역 개편 전까지 준비 중인 안내입니다. 개편 이후 정식 공개됩니다.", inner: chips(P.facts.reform.map((r) => ({ label: r.name, href: `${P.base}${r.slug}/` }))) })
+    : "";
+
+  const body = `${breadcrumb(crumb({ label: P.name, href: P.base }))}
+${hero({ eyebrow: `${P.name} 출장마사지`, h1: P.heroH1, lead: P.heroLead, visual: P.key, ctas: [
+    { label: "지역별 안내", href: "#gu", variant: "btn--orange" },
+    { label: "생활권 보기", href: `${P.base}life/`, variant: "btn--gold" },
+    { label: "지하철역 보기", href: `${P.base}station/`, variant: "btn--invert" },
+    { label: "예약 전 확인", href: "/check/", variant: "btn--invert" },
+  ] })}
+${section({ eyebrow: "지역 안내", h2: P.introH2, inner: `<div class="prose"><p class="muted">${esc(P.facts.intro || P.heroLead)}</p></div>` })}
+<div id="gu"></div>
+${section({ tint: true, eyebrow: "지역별 안내", h2: `${P.name} ${P.guWord} 방문 가능 지역`, lead: "각 지역의 대표 생활권과 가까운 역, 이용 장소 기준을 함께 확인하세요.", inner: cardGrid(guCards, 3) })}
+${section({ eyebrow: "생활권", h2: `${P.name} 주요 생활권 안내`, inner: lifeSections })}
+${P.facts.station && P.facts.station.length ? section({ tint: true, eyebrow: "지하철역", h2: `${P.name} 주요 역세권`, lead: "역명은 위치 설명용이며, 출구별·노선별 페이지는 만들지 않습니다.", inner: chips(P.facts.station.map((s) => ({ label: s.name, href: `${P.base}station/${s.slug}/` }))) }) : ""}
+${reformChips}
+${section({ eyebrow: "이용 안내", h2: "이용 장소·예약 전 확인", inner: chips([
+    { label: "이용 장소", href: "/use/" }, { label: "예약 전 확인", href: "/check/" }, { label: "운영 기준", href: "/policy/" },
+  ]) })}
+${inquiryCta()}`;
+
+  register({
+    title: P.title, description: P.desc, path: P.base, h1: P.heroH1,
+    activeNav: P.base, image: P.og, crumbs: crumb({ label: P.name, href: P.base }),
+    faqs: [
+      { q: "이 지역도 방문 가능한가요?", a: "실제 방문 주소, 가까운 생활권, 예약 가능 시간, 이동 기준을 확인한 뒤 안내합니다." },
+      { q: "호텔이나 숙소에서도 이용할 수 있나요?", a: "숙소 정책과 객실 출입 가능 여부를 먼저 확인해야 합니다." },
+      { q: "불법·선정적 서비스도 가능한가요?", a: "불법·선정적 서비스는 제공하거나 안내하지 않습니다." },
+    ],
+    priority: 0.95, body,
+  });
+}
+
+function buildRegionSubHub(P, kind) {
+  const k = REGION_KIND[kind];
+  const items = P.facts[kind] || [];
+  const h1 = `${P.name} ${k.label} 안내`;
+  const desc = kind === "life"
+    ? `${P.name} 주요 생활권별 방문 안내. 신도시·업무지구·주거 생활권 기준 확인`
+    : `${P.name} 주요 역세권 위치·예약 안내. 역명 기준 1 URL, 출구·노선 구분 없음`;
+  const inner = kind === "station"
+    ? chips(items.map((i) => ({ label: i.name, href: `${P.base}station/${i.slug}/` })))
+    : cardGrid(items.map((i) => ({ title: i.name, href: `${P.base}life/${i.slug}/`, tag: k.label, desc: `${i.name} 생활권 방문 기준을 안내합니다.` })), 3);
+  register({
+    title: `${h1}｜Bun 마사지`, description: desc, path: `${P.base}${kind}/`, h1,
+    activeNav: P.base, image: P.og,
+    crumbs: crumb({ label: P.name, href: P.base }, { label: k.label, href: `${P.base}${kind}/` }),
+    priority: 0.7,
+    body: `${breadcrumb(crumb({ label: P.name, href: P.base }, { label: k.label, href: `${P.base}${kind}/` }))}
+${hero({ eyebrow: `${P.name} · ${k.label}`, h1, lead: desc, visual: k.visual })}
+${section({ inner })}
+${inquiryCta()}`,
+  });
+}
+
+function buildRegionReform(P) {
+  if (!P.facts.reform) return;
+  for (const r of P.facts.reform) {
+    const crumbs = crumb({ label: P.name, href: P.base }, { label: r.name, href: `${P.base}${r.slug}/` });
+    register({
+      title: `${r.name}｜${P.name} 2026 행정구역 개편 대응 (준비 중)`,
+      description: `${P.name} ${r.name}는 2026 행정구역 개편 대응 준비 중인 안내 페이지입니다`,
+      path: `${P.base}${r.slug}/`, h1: `${r.name} · 2026 개편 대응 (준비 중)`,
+      activeNav: P.base, noindex: true, priority: 0.1, crumbs,
+      body: `${breadcrumb(crumbs)}
+${section({ h2: `${r.name} · 준비 중`, inner: `<div class="prose"><div class="notice"><strong>${esc(r.name)}</strong>는 2026년 ${esc(P.name)} 행정구역 개편 대응을 위해 준비 중인 페이지입니다. 개편 시행 이후 정식 안내로 공개됩니다. 현재 가능한 지역은 <a href="${P.base}">${esc(P.name)} 현행 구군 안내</a>에서 확인하세요.</div></div>` })}`,
+    });
+  }
+}
+
+async function buildRegion(P, report) {
+  buildRegionHub(P);
+  buildRegionSubHub(P, "life");
+  buildRegionSubHub(P, "station");
+  buildRegionReform(P);
+
+  const base = join(__dirname, `src/data/${P.key}/pages`);
+  let files = [];
+  try { files = (await readdir(base, { recursive: true })).filter((f) => f.endsWith(".json")); } catch { files = []; }
+  const items = [];
+  for (const f of files) {
+    try { items.push(JSON.parse(await readFile(join(base, f), "utf8"))); }
+    catch (e) { console.log(`! ${P.key} JSON 파싱 실패:`, f, e.message); }
+  }
+
+  const dongByGu = {};
+  items.filter((it) => it.kind === "dong").forEach((it) => { (dongByGu[it.parentSlug] ||= []).push({ name: it.name, slug: it.slug }); });
+
+  const valid = new Set([P.base, `${P.base}life/`, `${P.base}station/`]);
+  P.facts.gu.forEach((g) => valid.add(`${P.base}${g.slug}/`));
+  (P.facts.reform || []).forEach((r) => valid.add(`${P.base}${r.slug}/`));
+  items.forEach((it) => valid.add(regionPath(P, it)));
+  const filterRel = makeFilterRelated(P, valid);
+
+  for (const it of items) {
+    const r = registerRegionContent(P, it, filterRel, dongByGu);
+    report.push({ ...r, kind: it.kind, name: it.name });
+  }
+}
+
+const REGIONS = {
+  gyeonggi: {
+    key: "gyeonggi", name: "경기", base: "/gyeonggi/", og: "/assets/og-gyeonggi.svg", guWord: "31개 시군",
+    facts: gyeonggiFacts,
+    title: "경기 출장마사지｜수원·분당·일산·동탄 홈타이 지역 안내",
+    desc: "경기 출장마사지·홈타이 수원, 분당, 일산, 동탄 등 시군·생활권별 방문 확인사항 안내",
+    heroH1: "경기 출장마사지 · 시군별 방문 가능 지역 안내",
+    heroLead: "수원, 성남, 용인, 고양, 부천, 안산 등 경기 31개 시군과 신도시 생활권, 자택·호텔·오피스텔 이용 전 확인사항을 안내합니다.",
+    introH2: "경기는 시군 범위가 넓어 생활권 확인이 중요합니다",
+  },
+  incheon: {
+    key: "incheon", name: "인천", base: "/incheon/", og: "/assets/og-incheon.svg", guWord: "구군",
+    facts: incheonFacts,
+    title: "인천 출장마사지｜송도·부평·구월·청라 홈타이 지역 안내",
+    desc: "인천 출장마사지·홈타이 송도, 부평, 구월, 청라 등 구군·생활권별 방문 확인사항 안내",
+    heroH1: "인천 출장마사지 · 구군별 방문 가능 지역 안내",
+    heroLead: "송도, 부평, 구월, 청라, 검단, 영종 등 인천 원도심·신도시·공항·도서 지역과 자택·호텔·오피스텔 이용 전 확인사항을 안내합니다.",
+    introH2: "인천은 원도심·신도시·공항·도서를 구분해 확인합니다",
+  },
+};
+
 async function main() {
   if (existsSync(OUT)) await rm(OUT, { recursive: true, force: true });
   await mkdir(join(OUT, "assets"), { recursive: true });
@@ -758,8 +1001,9 @@ async function main() {
   buildStationHub();
   const seoulReport = [];
   await buildSeoul(seoulReport);
-  buildProvince("gyeonggi");
-  buildProvince("incheon");
+  const ggReport = [], icReport = [];
+  await buildRegion(REGIONS.gyeonggi, ggReport);
+  await buildRegion(REGIONS.incheon, icReport);
   buildContact();
   buildPolicy();
   build404();
@@ -769,6 +1013,8 @@ async function main() {
   await copyFile(join(__dirname, "src/styles/styles.css"), join(OUT, "styles.css"));
   await writeFile(join(OUT, "assets/og-default.svg"), OG_SVG, "utf8");
   await writeFile(join(OUT, "assets/og-seoul.svg"), OG_SEOUL, "utf8");
+  await writeFile(join(OUT, "assets/og-gyeonggi.svg"), ogRegion("경기 출장마사지", "시군별 방문 가능 지역 안내", "leaf"), "utf8");
+  await writeFile(join(OUT, "assets/og-incheon.svg"), ogRegion("인천 출장마사지", "구군별 방문 가능 지역 안내", "wave"), "utf8");
   await writeFile(join(OUT, "assets/favicon.svg"), FAVICON_SVG, "utf8");
   await writeFile(join(OUT, "sitemap.xml"), buildSitemap(), "utf8");
   await writeFile(join(OUT, "robots.txt"), ROBOTS, "utf8");
@@ -776,13 +1022,11 @@ async function main() {
   const indexed = pages.filter((p) => !p.noindex && !p.path.endsWith(".html")).length;
   const noindexed = pages.filter((p) => p.noindex).length;
   console.log(`✓ ${pages.length} 페이지 생성 (색인 ${indexed} · noindex ${noindexed})`);
-  if (seoulReport.length) {
-    const short = seoulReport.filter((r) => r.charCount < 2000);
-    console.log(`  서울 콘텐츠 ${seoulReport.length}개 · 평균 ${Math.round(seoulReport.reduce((a, r) => a + r.charCount, 0) / seoulReport.length)}자`);
-    if (short.length) {
-      console.log(`  ! 2000자 미만 ${short.length}개:`);
-      short.forEach((r) => console.log(`    - ${r.path} (${r.charCount}자)${r.noindex ? " [noindex]" : ""}`));
-    }
+  for (const [nm, rep] of [["서울", seoulReport], ["경기", ggReport], ["인천", icReport]]) {
+    if (!rep.length) continue;
+    const avg = Math.round(rep.reduce((a, r) => a + r.charCount, 0) / rep.length);
+    const ni = rep.filter((r) => r.noindex).length;
+    console.log(`  ${nm} 콘텐츠 ${rep.length}개 · 평균 ${avg}자 · noindex ${ni}`);
   }
   if (longClampWarnings.length) {
     console.log(`! 디스크립션 80자 절삭: ${longClampWarnings.length}건`);
