@@ -44,7 +44,8 @@
     { "slug": "sangbong-jungnang", "name": "상봉·중랑", "category": "주거형", "includes": ["상봉동", "면목동"], "stations": ["상봉역", "면목역"], "gu": "jungnang-gu" },
     { "slug": "sillim-seoul-univ", "name": "신림·서울대입구", "category": "주거형", "includes": ["신림동", "봉천동"], "stations": ["신림역", "서울대입구역"], "gu": "gwanak-gu" },
     { "slug": "jongno-gwanghwamun", "name": "종로·광화문", "category": "도심형", "includes": ["종로 생활권", "광화문 일대"], "stations": ["광화문역", "종로3가역"], "gu": "jongno-gu" },
-    { "slug": "dongdaemun-cheongnyangni", "name": "동대문·청량리", "category": "도심형", "includes": ["청량리", "전농동"], "stations": ["청량리역", "회기역"], "gu": "dongdaemun-gu" }
+    { "slug": "dongdaemun-cheongnyangni", "name": "동대문·청량리", "category": "도심형", "includes": ["청량리", "전농동"], "stations": ["청량리역", "회기역"], "gu": "dongdaemun-gu" },
+    { "slug": "chungmuro-euljiro", "name": "충무로·을지로", "category": "도심형", "includes": ["충무로", "을지로동"], "stations": ["을지로입구역", "명동역"], "gu": "jung-gu" }
   ],
   "station": [
     { "slug": "gangnam-station", "name": "강남역", "gu": "gangnam-gu", "transfer": true, "life": ["강남역·역삼"] },
