@@ -127,6 +127,58 @@ export function inquiryCta() {
 </section>`;
 }
 
+// 요금 안내 (프리미엄 다크 섹션) — 메인·전 지역 공통
+export function priceTable(noteLink = "/check/") {
+  const cards = site.pricing
+    .map((p) => {
+      const feat = p.featured;
+      return `
+      <div class="price-card${feat ? " price-card--featured" : ""}">
+        ${feat ? `<span class="price-card__badge">추천</span>` : ""}
+        <h3>${esc(p.label)}</h3>
+        <div class="price-card__amount">${esc(p.amount)}<span>원</span></div>
+        <div class="price-card__time">${esc(p.time)}</div>
+        <p>${esc(p.desc)}</p>
+        <a class="btn ${feat ? "btn--gold" : "btn--invert"} btn--block" href="${site.phoneHref}">예약 문의</a>
+      </div>`;
+    })
+    .join("");
+  return `
+<section class="section price">
+  <div class="container">
+    <div class="section__head price__head">
+      <span class="eyebrow">요금 안내</span>
+      <h2>코스 시간으로 보는 기본 요금</h2>
+      <p>관리 시간(60·90·120분)을 기준으로 정리한 기본 금액입니다. 표시되지 않은 별도 비용은 두지 않는 것을 원칙으로 안내합니다.</p>
+    </div>
+    <div class="price-grid">${cards}</div>
+    <p class="price-note">방문 지역과 시간대, 이동 거리에 따라 최종 금액은 통화 시 확정됩니다. <a href="${noteLink}">요금·예약 기준 자세히 보기 →</a></p>
+  </div>
+</section>`;
+}
+
+// 롱테일 주제 내부링크 — 메인·전 지역 공통(이용 장소·예약 전 확인·질문 클러스터로 연결)
+const LONGTAIL_TOPICS = [
+  { label: "자택 방문 마사지 이용 기준", href: "/use/home/" },
+  { label: "호텔·숙소 출장마사지 가능 여부", href: "/use/hotel/" },
+  { label: "오피스텔 출장마사지 방문 기준", href: "/use/officetel/" },
+  { label: "업무지구 야간 예약 안내", href: "/use/night/" },
+  { label: "역세권 기준으로 찾는 방법", href: "/questions/station-area/" },
+  { label: "외곽·공항 지역 이용 기준", href: "/questions/airport-island/" },
+  { label: "추가 이동비 기준 확인", href: "/check/move-fee/" },
+  { label: "예약 가능 시간 확인", href: "/check/time/" },
+  { label: "개인정보 처리 기준 안내", href: "/check/privacy/" },
+  { label: "불법·선정적 서비스 불가 안내", href: "/check/legal/" },
+];
+export function longtailTopics(extra = []) {
+  return section({
+    tint: true,
+    eyebrow: "함께 찾는 주제",
+    h2: "이런 주제도 확인해 보세요",
+    inner: chips([...extra, ...LONGTAIL_TOPICS]),
+  });
+}
+
 // 표준 체크리스트(예약 전 확인)
 export const STANDARD_CHECKLIST = [
   "방문 주소를 정확히 확인했나요?",

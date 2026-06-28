@@ -12,6 +12,11 @@
     "website": "https://t.me/bun_web",
     "partnership": "https://t.me/bun_biz"
   },
+  "pricing": [
+    { "label": "60분 코스", "amount": "90,000", "time": "60분", "desc": "핵심 부위 위주 가벼운 이완" },
+    { "label": "90분 코스", "amount": "150,000", "time": "90분", "desc": "전신 균형 표준 구성·아로마 포함", "featured": true },
+    { "label": "120분 코스", "amount": "180,000", "time": "120분", "desc": "구석구석 집중하는 프리미엄 구성" }
+  ],
   "social": {
     "telegram": "https://t.me/bun_web"
   },

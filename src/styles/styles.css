@@ -326,6 +326,42 @@ li { margin-bottom: 0.35em; }
 .badge--gyeonggi { background: #e6f6ec; color: #1d6b3e; }
 .badge--incheon { background: #fdeede; color: #a4520a; }
 
+/* 요금 안내 (프리미엄 다크 섹션) */
+.price { background: var(--grad-hero); color: var(--c-text-invert); position: relative; overflow: hidden; }
+.price::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(70% 60% at 50% -10%, rgba(194,160,98,0.16), transparent 60%);
+  pointer-events: none;
+}
+.price__head { text-align: center; margin-inline: auto; }
+.price__head h2 { color: #fff; }
+.price__head p { color: var(--c-text-invert-muted); }
+.price-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-4);
+  align-items: stretch; max-width: 980px; margin-inline: auto;
+}
+.price-card {
+  position: relative; display: flex; flex-direction: column; text-align: center;
+  background: var(--c-espresso-2); border: 1px solid var(--c-line-invert);
+  border-radius: var(--radius-lg); padding: var(--sp-6) var(--sp-5);
+}
+.price-card h3 { color: #fff; font-size: var(--fs-md); margin-bottom: var(--sp-4); }
+.price-card__amount { font-size: 2.4rem; font-weight: 800; color: #fff; letter-spacing: -0.03em; line-height: 1; }
+.price-card__amount span { font-size: var(--fs-base); font-weight: 600; color: var(--c-text-invert-muted); margin-left: 2px; }
+.price-card__time { color: var(--c-gold-2); font-weight: 700; font-size: var(--fs-sm); margin-top: var(--sp-2); }
+.price-card p { color: var(--c-text-invert-muted); font-size: var(--fs-sm); margin: var(--sp-4) 0 var(--sp-5); flex: 1; }
+.price-card--featured {
+  border-color: var(--c-gold); box-shadow: 0 0 0 1px var(--c-gold), 0 24px 50px rgba(194,160,98,0.18);
+  transform: translateY(-8px);
+}
+.price-card__badge {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: var(--grad-gold); color: #2a2210; font-weight: 800; font-size: var(--fs-xs);
+  padding: 0.3em 1em; border-radius: var(--radius-pill);
+}
+.price-note { text-align: center; color: var(--c-text-invert-muted); font-size: var(--fs-sm); margin: var(--sp-6) 0 0; }
+.price-note a { color: var(--c-gold-2); font-weight: 600; }
+
 /* ----------------------------------------------------------------------------
    7. 푸터 — 오렌지 텔레그램 CTA + 업체정보
    ---------------------------------------------------------------------------- */
@@ -388,6 +424,8 @@ li { margin-bottom: 0.35em; }
   .grid--2, .grid--3, .grid--4 { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-cta { flex-direction: column; align-items: flex-start; }
+  .price-grid { grid-template-columns: 1fr; max-width: 420px; }
+  .price-card--featured { transform: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; transition: none !important; animation: none !important; }

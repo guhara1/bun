@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 import { renderPage, clampDesc, site, esc } from "./src/templates/layout.mjs";
 import {
   breadcrumb, hero, section, cardGrid, chips, checklist, faqList,
-  answerBlocks, inquiryCta, STANDARD_CHECKLIST,
+  answerBlocks, inquiryCta, priceTable, longtailTopics, STANDARD_CHECKLIST,
 } from "./src/templates/components.mjs";
 
 import seoul from "./src/data/seoul.json" with { type: "json" };
@@ -127,6 +127,8 @@ ${section({
     inner: `<div class="prose">${checklist(STANDARD_CHECKLIST)}</div>`,
   })}
 
+${priceTable()}
+${longtailTopics()}
 ${inquiryCta()}
 `;
 
@@ -631,7 +633,9 @@ ${hero({ eyebrow: `서울 · ${kind.label}`, h1: it.h1, lead: it.lead || it.desc
 </div></section>
 ${dongChips}
 ${faqs ? section({ tint: true, h2: "자주 묻는 질문", inner: faqList(it.faqs.map((f) => ({ q: f.q, a: f.a }))) }) : ""}
+${priceTable()}
 ${related}
+${longtailTopics()}
 ${inquiryCta()}`;
 
   register({
@@ -699,6 +703,8 @@ ${section({ tint: true, eyebrow: "지하철역", h2: "서울 주요 역세권", 
 ${section({ eyebrow: "이용 장소", h2: "이용 장소에 따라 확인할 내용이 다릅니다", inner: cardGrid(useCards, 4) })}
 ${section({ tint: true, eyebrow: "체크리스트", h2: "예약 전 확인해야 할 내용", inner: `<div class="prose">${checklist(STANDARD_CHECKLIST.slice(0, 8))}</div>` })}
 ${section({ eyebrow: "운영 기준", h2: "서울 지역 페이지 운영 기준", inner: `<div class="prose"><p class="muted">이 사이트는 불법·선정적 서비스를 안내하지 않습니다. 허위 후기, 가짜 평점, 과장된 가격 문구를 사용하지 않으며, 모든 지역 페이지는 지역명만 바꾸지 않고 생활권·가까운 역·이용 장소·예약 전 확인사항을 다르게 작성합니다.</p>${chips(seoulFacts.policy.map((p) => ({ label: p.name, href: `/seoul/policy/${p.slug}/` })))}</div>` })}
+${priceTable()}
+${longtailTopics()}
 ${inquiryCta()}`;
 
   register({
@@ -843,7 +849,9 @@ ${hero({ eyebrow: `${P.name} · ${kind.label}`, h1: it.h1, lead: it.lead || it.d
 </div></section>
 ${dongChips}
 ${faqs ? section({ tint: true, h2: "자주 묻는 질문", inner: faqList(it.faqs.map((f) => ({ q: f.q, a: f.a }))) }) : ""}
+${priceTable()}
 ${related}
+${longtailTopics()}
 ${inquiryCta()}`;
 
   register({
@@ -886,6 +894,8 @@ ${reformChips}
 ${section({ eyebrow: "이용 안내", h2: "이용 장소·예약 전 확인", inner: chips([
     { label: "이용 장소", href: "/use/" }, { label: "예약 전 확인", href: "/check/" }, { label: "운영 기준", href: "/policy/" },
   ]) })}
+${priceTable()}
+${longtailTopics()}
 ${inquiryCta()}`;
 
   register({
