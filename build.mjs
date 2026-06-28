@@ -1,11 +1,11 @@
 // Bun 마사지 — 정적 사이트 생성기 (zero-dependency, node/bun 호환)
 // 모든 페이지는 공통 레이아웃을 거쳐 헤더·푸터·스키마·SEO가 일관됩니다.
-import { mkdir, writeFile, copyFile, readdir, rm } from "node:fs/promises";
+import { mkdir, writeFile, copyFile, readdir, readFile, rm } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { renderPage, clampDesc, site } from "./src/templates/layout.mjs";
+import { renderPage, clampDesc, site, esc } from "./src/templates/layout.mjs";
 import {
   breadcrumb, hero, section, cardGrid, chips, checklist, faqList,
   answerBlocks, inquiryCta, STANDARD_CHECKLIST,
@@ -16,10 +16,16 @@ import gyeonggi from "./src/data/gyeonggi.json" with { type: "json" };
 import incheon from "./src/data/incheon.json" with { type: "json" };
 import questions from "./src/data/questions.json" with { type: "json" };
 import content from "./src/data/content.json" with { type: "json" };
+import seoulFacts from "./src/data/seoul-facts.json" with { type: "json" };
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT = join(__dirname, "dist");
 const provinces = { seoul, gyeonggi, incheon };
+
+// 서울 목록을 facts 기준으로 동기화 → 사이트 전역 허브의 내부링크가 생성 페이지와 일치
+seoul.districts = seoulFacts.gu.map((g) => ({ name: g.name, slug: g.slug, focus: g.direction }));
+seoul.lifeAreas = seoulFacts.life.map((l) => ({ name: l.name, slug: l.slug }));
+seoul.stations = seoulFacts.station.slice(0, 6).map((s) => ({ name: s.name, slug: s.slug }));
 
 const pages = []; // { path, html, noindex, priority }
 const longClampWarnings = [];
@@ -49,7 +55,7 @@ function buildHome() {
     { title: "인천", desc: "현행 구군과 2026 개편 대응, 신도시·공항·도서 지역을 안내합니다.", href: "/incheon/", tag: "지역별 안내" },
   ];
 
-  const lifeSeoul = ["강남역·역삼", "잠실·송파", "홍대·합정", "여의도·영등포", "성수·왕십리", "용산·서울역"];
+  const lifeSeoul = ["강남역·역삼", "잠실·송파", "홍대·합정", "여의도·영등포", "성수·왕십리", "서울역·용산"];
   const lifeGg = ["수원역·인계동", "분당·판교", "죽전·수지", "동탄신도시", "부천역·상동", "일산·킨텍스", "의정부역·민락", "하남·미사"];
   const lifeIc = ["송도국제도시", "구월·인천시청", "부평역·부평시장", "주안·도화", "청라국제도시", "검단신도시", "영종·운서", "인천공항"];
   const lifeChips = (province, names) =>
@@ -496,6 +502,8 @@ Sitemap: ${site.baseUrl}/sitemap.xml
 
 const OG_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><defs><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#221c18"/><stop offset="1" stop-color="#161210"/></linearGradient><linearGradient id="o" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8a2b"/><stop offset="1" stop-color="#cf4708"/></linearGradient></defs><rect width="1200" height="630" fill="url(#b)"/><circle cx="1050" cy="80" r="320" fill="url(#o)" opacity="0.18"/><rect x="80" y="250" width="64" height="64" rx="16" fill="url(#o)"/><text x="170" y="298" font-family="Pretendard, sans-serif" font-size="44" font-weight="800" fill="#fff">Bun 마사지</text><text x="80" y="400" font-family="Pretendard, sans-serif" font-size="56" font-weight="800" fill="#fff">서울·경기·인천 출장마사지</text><text x="80" y="470" font-family="Pretendard, sans-serif" font-size="40" font-weight="600" fill="#c2a062">수도권 지역별 질문 안내</text><text x="80" y="545" font-family="Pretendard, sans-serif" font-size="32" fill="#c5bcae">전화예약 0508-202-4719</text></svg>`;
 
+const OG_SEOUL = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><defs><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a231d"/><stop offset="1" stop-color="#161210"/></linearGradient><linearGradient id="o" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff9d4d"/><stop offset="1" stop-color="#cf4708"/></linearGradient><linearGradient id="s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b29c86"/><stop offset="1" stop-color="#6f5f51"/></linearGradient></defs><rect width="1200" height="630" fill="url(#b)"/><circle cx="1000" cy="120" r="300" fill="url(#o)" opacity="0.16"/><g transform="translate(980,330)"><ellipse cx="0" cy="120" rx="120" ry="26" fill="url(#s)"/><ellipse cx="0" cy="70" rx="96" ry="22" fill="url(#s)"/><ellipse cx="0" cy="28" rx="72" ry="18" fill="url(#s)"/><ellipse cx="0" cy="-6" rx="48" ry="14" fill="url(#s)"/><path d="M0 -20 C18 -34 28 -54 28 -70 C12 -64 2 -44 0 -20 Z" fill="#9aa861"/></g><rect x="80" y="250" width="64" height="64" rx="16" fill="url(#o)"/><text x="170" y="298" font-family="Pretendard, sans-serif" font-size="44" font-weight="800" fill="#fff">Bun 마사지</text><text x="80" y="400" font-family="Pretendard, sans-serif" font-size="60" font-weight="800" fill="#fff">서울 출장마사지</text><text x="80" y="470" font-family="Pretendard, sans-serif" font-size="38" font-weight="600" fill="#c2a062">생활권별 방문 가능 지역 안내</text><text x="80" y="545" font-family="Pretendard, sans-serif" font-size="32" fill="#c5bcae">전화예약 0508-202-4719</text></svg>`;
+
 const FAVICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8a2b"/><stop offset="1" stop-color="#cf4708"/></linearGradient></defs><rect width="32" height="32" rx="8" fill="url(#g)"/><text x="16" y="23" font-family="sans-serif" font-size="20" font-weight="900" fill="#fff" text-anchor="middle">B</text></svg>`;
 
 // ---------------------------------------------------------------------------
@@ -509,6 +517,216 @@ async function writePage(p) {
   await writeFile(filePath, p.html, "utf8");
 }
 
+// ===========================================================================
+// 서울 — 콘텐츠 파일 기반(2,000~2,500자) 상세페이지 생성
+// ===========================================================================
+const SEOUL_KIND = {
+  gu:     { label: "지역별 안내", visual: "seoul",  crumbHub: ["서울", "/seoul/"] },
+  dong:   { label: "행정동",      visual: "seoul",  crumbHub: ["서울", "/seoul/"] },
+  life:   { label: "생활권",      visual: "life",   crumbHub: ["생활권", "/seoul/life/"], hub: "/seoul/life/" },
+  station:{ label: "지하철역",    visual: "station",crumbHub: ["지하철역", "/seoul/station/"], hub: "/seoul/station/" },
+  use:    { label: "이용 장소",   visual: "use",    crumbHub: ["이용 장소", "/seoul/use/"], hub: "/seoul/use/" },
+  check:  { label: "예약 전 확인",visual: "check",  crumbHub: ["예약 전 확인", "/seoul/check/"], hub: "/seoul/check/" },
+  policy: { label: "운영 기준",   visual: "policy", crumbHub: ["운영 기준", "/seoul/policy/"], hub: "/seoul/policy/" },
+};
+
+function seoulPath(it) {
+  switch (it.kind) {
+    case "gu": return `/seoul/${it.slug}/`;
+    case "dong": return `/seoul/${it.parentSlug}/${it.slug}/`;
+    default: return `/seoul/${it.kind}/${it.slug}/`;
+  }
+}
+
+// 생성될 서울 페이지 경로 집합(내부링크 깨짐 방지용)
+let validSeoulPaths = new Set();
+function filterRelated(related) {
+  if (!related) return [];
+  const seen = new Set();
+  const ok = related.filter((r) => {
+    if (!r || !r.href) return false;
+    let h = r.href; if (!h.endsWith("/")) h += "/";
+    if (seen.has(h)) return false; seen.add(h);
+    // /seoul/* 는 실제 생성 경로만 허용, 그 외(타 지역/허브)는 그대로 통과
+    if (h.startsWith("/seoul/")) return validSeoulPaths.has(h);
+    return true;
+  });
+  return ok.length ? ok : [{ label: "서울 전체 안내", href: "/seoul/" }, { label: "지역별 안내", href: "/area/" }];
+}
+
+function whoHowWhy(name) {
+  return `
+  <div class="answer-block">
+    <h3>Who · How · Why</h3>
+    <p><strong>Who.</strong> 이 안내는 Bun 마사지 운영팀의 서울 지역 콘텐츠 담당자가 작성하고 운영 책임자가 검수합니다.</p>
+    <p><strong>How.</strong> 서울시 행정구역, 주요 생활권, 지하철역, 자택·호텔·오피스텔 등 이용 장소별 예약 전 확인사항을 기준으로 ${esc(name)} 정보를 정리했습니다.</p>
+    <p><strong>Why.</strong> 서울에서 방문형 관리 서비스를 찾는 이용자가 자신의 지역과 이용 장소를 정확하고 안전하게 확인하도록 돕기 위해 작성했습니다.</p>
+    <p class="muted" style="font-size:var(--fs-xs)">작성·검수 · Bun 마사지 운영팀 · 최종 점검 ${new Date().toISOString().slice(0,10)}</p>
+  </div>`;
+}
+
+function plainLen(html) {
+  return [...html.replace(/<[^>]+>/g, "").replace(/\s+/g, "")].length;
+}
+
+function registerSeoulContent(it) {
+  const kind = SEOUL_KIND[it.kind];
+  const path = seoulPath(it);
+  const crumbs = crumb({ label: "서울", href: "/seoul/" });
+  if (it.kind === "dong") crumbs.push({ label: it.parentName, href: `/seoul/${it.parentSlug}/` });
+  else if (kind.hub) crumbs.push({ label: kind.label, href: kind.hub });
+  crumbs.push({ label: it.name, href: path });
+
+  const bodyText = it.sections.map((s) => s.html).join(" ");
+  const charCount = plainLen(bodyText);
+  const noindex = charCount < 1700; // 본문 부족 시 색인 제외(품질 보호)
+
+  const sectionsHtml = it.sections
+    .map((s) => `<h2>${esc(s.h2)}</h2>${s.html}`)
+    .join("\n");
+
+  const relatedLinks = filterRelated(it.related);
+  const related = relatedLinks.length
+    ? section({ tint: true, h2: "관련 지역 보기", inner: chips(relatedLinks) })
+    : "";
+  const faqs = it.faqs && it.faqs.length;
+
+  const body = `${breadcrumb(crumbs)}
+${hero({ eyebrow: `서울 · ${kind.label}`, h1: it.h1, lead: it.lead || it.desc, visual: kind.visual })}
+<section class="section"><div class="container">
+  <div class="content prose">
+    ${sectionsHtml}
+    ${whoHowWhy(it.name)}
+  </div>
+</div></section>
+${faqs ? section({ tint: true, h2: "자주 묻는 질문", inner: faqList(it.faqs.map((f) => ({ q: f.q, a: f.a }))) }) : ""}
+${related}
+${inquiryCta()}`;
+
+  register({
+    title: it.title,
+    description: it.desc,
+    path,
+    h1: it.h1,
+    activeNav: "/seoul/",
+    image: "/assets/og-seoul.svg",
+    crumbs,
+    faqs: faqs ? it.faqs : undefined,
+    noindex,
+    priority: it.kind === "gu" ? 0.8 : 0.7,
+    body,
+  });
+  return { path, charCount, noindex };
+}
+
+async function loadSeoulContent() {
+  const base = join(__dirname, "src/data/seoul/pages");
+  let files = [];
+  try {
+    files = (await readdir(base, { recursive: true })).filter((f) => f.endsWith(".json"));
+  } catch { return []; }
+  const items = [];
+  for (const f of files) {
+    try { items.push(JSON.parse(await readFile(join(base, f), "utf8"))); }
+    catch (e) { console.log("! JSON 파싱 실패:", f, e.message); }
+  }
+  return items;
+}
+
+function buildSeoulHub() {
+  const guCards = seoulFacts.gu.map((g) => ({
+    title: g.name,
+    tag: g.type,
+    desc: `대표 생활권 ${g.life.slice(0, 3).join(", ")} · 가까운 역 ${g.stations.slice(0, 2).join(", ")}`,
+    href: `/seoul/${g.slug}/`,
+  }));
+  const lifeByCat = {};
+  for (const l of seoulFacts.life) (lifeByCat[l.category] ||= []).push(l);
+  const lifeSections = Object.entries(lifeByCat)
+    .map(([cat, arr]) => `<h3>${esc(cat)}</h3>${chips(arr.map((l) => ({ label: l.name, href: `/seoul/life/${l.slug}/` })))}`)
+    .join("");
+  const useCards = seoulFacts.use.map((u) => ({ title: u.name, href: `/seoul/use/${u.slug}/`, tag: "이용 장소", desc: `${u.name} 이용 시 확인사항을 안내합니다.` }));
+
+  const body = `${breadcrumb(crumb({ label: "서울", href: "/seoul/" }))}
+${hero({
+    eyebrow: "서울 출장마사지",
+    h1: "서울 출장마사지 · 생활권별 방문 가능 지역 안내",
+    lead: "강남, 잠실, 홍대, 여의도, 성수, 용산, 목동, 마곡 등 서울 주요 생활권과 자택·호텔·오피스텔 이용 전 확인사항을 안내합니다.",
+    visual: "seoul",
+    ctas: [
+      { label: "지역별 안내", href: "#gu", variant: "btn--orange" },
+      { label: "생활권 보기", href: "/seoul/life/", variant: "btn--gold" },
+      { label: "지하철역 보기", href: "/seoul/station/", variant: "btn--invert" },
+      { label: "예약 전 확인", href: "/seoul/check/", variant: "btn--invert" },
+    ],
+  })}
+${section({ eyebrow: "왜 생활권인가", h2: "서울 출장마사지는 구 이름보다 생활권 확인이 중요합니다", inner: `<div class="prose"><p class="muted">서울은 25개 구와 수백 개 행정동이 촘촘하게 연결된 도시입니다. 같은 구 안에서도 강남역·역삼·삼성·청담처럼 이용 환경이 다르고, 송파구 안에서도 잠실·문정·가락의 방문 기준이 다릅니다. 이 사이트는 지역명만 나열하지 않고 실제 방문 주소, 가까운 역, 생활권, 이용 장소, 예약 전 확인사항을 기준으로 안내합니다.</p></div>` })}
+<div id="gu"></div>
+${section({ tint: true, eyebrow: "지역별 안내", h2: "서울 구별 방문 가능 지역", lead: "각 구의 대표 생활권과 가까운 역, 이용 장소 기준을 함께 확인하세요.", inner: cardGrid(guCards, 3) })}
+${section({ eyebrow: "생활권", h2: "서울 주요 생활권 안내", inner: lifeSections })}
+${section({ tint: true, eyebrow: "지하철역", h2: "서울 주요 역세권", lead: "역명은 위치 설명용이며, 출구별·노선별 페이지는 만들지 않습니다.", inner: chips(seoulFacts.station.map((s) => ({ label: s.name, href: `/seoul/station/${s.slug}/` }))) })}
+${section({ eyebrow: "이용 장소", h2: "이용 장소에 따라 확인할 내용이 다릅니다", inner: cardGrid(useCards, 4) })}
+${section({ tint: true, eyebrow: "체크리스트", h2: "예약 전 확인해야 할 내용", inner: `<div class="prose">${checklist(STANDARD_CHECKLIST.slice(0, 8))}</div>` })}
+${section({ eyebrow: "운영 기준", h2: "서울 지역 페이지 운영 기준", inner: `<div class="prose"><p class="muted">이 사이트는 불법·선정적 서비스를 안내하지 않습니다. 허위 후기, 가짜 평점, 과장된 가격 문구를 사용하지 않으며, 모든 지역 페이지는 지역명만 바꾸지 않고 생활권·가까운 역·이용 장소·예약 전 확인사항을 다르게 작성합니다.</p>${chips(seoulFacts.policy.map((p) => ({ label: p.name, href: `/seoul/policy/${p.slug}/` })))}</div>` })}
+${inquiryCta()}`;
+
+  register({
+    title: "서울 출장마사지｜강남·잠실·홍대·여의도·성수 홈타이 지역 안내",
+    description: "서울 출장마사지·홈타이 강남, 잠실, 홍대, 여의도, 성수 등 생활권·이용 장소별 확인사항 안내",
+    path: "/seoul/",
+    h1: "서울 출장마사지 · 생활권별 방문 가능 지역 안내",
+    activeNav: "/seoul/",
+    image: "/assets/og-seoul.svg",
+    crumbs: crumb({ label: "서울", href: "/seoul/" }),
+    faqs: [
+      { q: "이 지역도 방문 가능한가요?", a: "실제 방문 주소, 가까운 생활권, 예약 가능 시간, 이동 기준을 확인한 뒤 안내합니다." },
+      { q: "호텔이나 숙소에서도 이용할 수 있나요?", a: "숙소 정책과 객실 출입 가능 여부를 먼저 확인해야 합니다." },
+      { q: "불법·선정적 서비스도 가능한가요?", a: "불법·선정적 서비스는 제공하거나 안내하지 않습니다." },
+    ],
+    priority: 0.95,
+    body,
+  });
+}
+
+function buildSeoulSubHub(kind) {
+  const k = SEOUL_KIND[kind];
+  const items = seoulFacts[kind] || [];
+  const map = {
+    life: { title: "서울 생활권 안내｜업무지구·주거·숙소 인접 생활권", desc: "강남역·여의도·홍대·잠실 등 서울 주요 생활권별 방문 안내", h1: "서울 생활권 안내", href: (i) => `/seoul/life/${i.slug}/` },
+    station: { title: "서울 지하철역 안내｜주요 역세권 예약 안내", desc: "강남역·잠실역·홍대입구역 등 서울 주요 역세권 위치·예약 안내", h1: "서울 지하철역 안내", href: (i) => `/seoul/station/${i.slug}/` },
+    use: { title: "서울 이용 장소 안내｜자택·호텔·오피스텔·업무지구", desc: "서울 자택·호텔·오피스텔·업무지구·역세권·야간·외곽 이용 기준 안내", h1: "서울 이용 장소 안내", href: (i) => `/seoul/use/${i.slug}/` },
+    check: { title: "서울 예약 전 확인 안내｜주소·출입·이동비·개인정보", desc: "서울 출장마사지 예약 전 방문 주소·건물 출입·이동비·개인정보 확인 안내", h1: "서울 예약 전 확인 안내", href: (i) => `/seoul/check/${i.slug}/` },
+    policy: { title: "서울 운영 기준｜개인정보·서비스 이용·콘텐츠 기준", desc: "Bun 마사지 서울 운영 기준 — 개인정보 처리방침·서비스 이용·콘텐츠 기준", h1: "서울 운영 기준", href: (i) => `/seoul/policy/${i.slug}/` },
+  };
+  const m = map[kind];
+  const dataSrc = kind === "station" ? items : items;
+  const cards = dataSrc.map((i) => ({ title: i.name, href: m.href(i), tag: k.label, desc: `${i.name} 관련 예약 전 확인사항을 안내합니다.` }));
+  register({
+    title: m.title, description: m.desc, path: k.hub, h1: m.h1,
+    activeNav: "/seoul/", image: "/assets/og-seoul.svg",
+    crumbs: crumb({ label: "서울", href: "/seoul/" }, { label: k.label, href: k.hub }),
+    priority: 0.7,
+    body: `${breadcrumb(crumb({ label: "서울", href: "/seoul/" }, { label: k.label, href: k.hub }))}
+${hero({ eyebrow: `서울 · ${k.label}`, h1: m.h1, lead: m.desc, visual: k.visual })}
+${section({ inner: kind === "station" ? chips(cards.map((c) => ({ label: c.title, href: c.href }))) : cardGrid(cards, 3) })}
+${inquiryCta()}`,
+  });
+}
+
+async function buildSeoul(report) {
+  buildSeoulHub();
+  for (const k of ["life", "station", "use", "check", "policy"]) buildSeoulSubHub(k);
+  const items = await loadSeoulContent();
+  // 유효 경로 집합 구성 → related 내부링크 검증
+  validSeoulPaths = new Set(["/seoul/", "/seoul/life/", "/seoul/station/", "/seoul/use/", "/seoul/check/", "/seoul/policy/"]);
+  seoulFacts.gu.forEach((g) => validSeoulPaths.add(`/seoul/${g.slug}/`));
+  items.forEach((it) => validSeoulPaths.add(seoulPath(it)));
+  for (const it of items) {
+    const r = registerSeoulContent(it);
+    report.push({ ...r, kind: it.kind, name: it.name });
+  }
+}
+
 async function main() {
   if (existsSync(OUT)) await rm(OUT, { recursive: true, force: true });
   await mkdir(join(OUT, "assets"), { recursive: true });
@@ -520,7 +738,8 @@ async function main() {
   buildSimpleSection("check", "/check/", "예약 전 확인", "예약 전 확인");
   buildLifeHub();
   buildStationHub();
-  buildProvince("seoul");
+  const seoulReport = [];
+  await buildSeoul(seoulReport);
   buildProvince("gyeonggi");
   buildProvince("incheon");
   buildContact();
@@ -531,6 +750,7 @@ async function main() {
 
   await copyFile(join(__dirname, "src/styles/styles.css"), join(OUT, "styles.css"));
   await writeFile(join(OUT, "assets/og-default.svg"), OG_SVG, "utf8");
+  await writeFile(join(OUT, "assets/og-seoul.svg"), OG_SEOUL, "utf8");
   await writeFile(join(OUT, "assets/favicon.svg"), FAVICON_SVG, "utf8");
   await writeFile(join(OUT, "sitemap.xml"), buildSitemap(), "utf8");
   await writeFile(join(OUT, "robots.txt"), ROBOTS, "utf8");
@@ -538,6 +758,14 @@ async function main() {
   const indexed = pages.filter((p) => !p.noindex && !p.path.endsWith(".html")).length;
   const noindexed = pages.filter((p) => p.noindex).length;
   console.log(`✓ ${pages.length} 페이지 생성 (색인 ${indexed} · noindex ${noindexed})`);
+  if (seoulReport.length) {
+    const short = seoulReport.filter((r) => r.charCount < 2000);
+    console.log(`  서울 콘텐츠 ${seoulReport.length}개 · 평균 ${Math.round(seoulReport.reduce((a, r) => a + r.charCount, 0) / seoulReport.length)}자`);
+    if (short.length) {
+      console.log(`  ! 2000자 미만 ${short.length}개:`);
+      short.forEach((r) => console.log(`    - ${r.path} (${r.charCount}자)${r.noindex ? " [noindex]" : ""}`));
+    }
+  }
   if (longClampWarnings.length) {
     console.log(`! 디스크립션 80자 절삭: ${longClampWarnings.length}건`);
     longClampWarnings.forEach((w) => console.log("  - " + w));
