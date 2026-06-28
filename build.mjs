@@ -813,7 +813,7 @@ function makeFilterRelated(P, validSet) {
   };
 }
 
-function registerRegionContent(P, it, filterRel, dongByGu) {
+function registerRegionContent(P, it, filterRel, dongByGu, ilbanguChildren = {}) {
   const kind = REGION_KIND[it.kind];
   const path = regionPath(P, it);
   const crumbs = crumb({ label: P.name, href: P.base });
@@ -832,6 +832,16 @@ function registerRegionContent(P, it, filterRel, dongByGu) {
     dongChips =
       (ilbangu.length ? section({ tint: true, h2: "행정구(일반구) 바로가기", inner: mk(ilbangu) }) : "") +
       (dongs.length ? section({ tint: !ilbangu.length, h2: "대표 행정동 바로가기", inner: mk(dongs) }) : "");
+  }
+  // 일반구 페이지: 소속 행정동 바로가기(자식 동)
+  if (it.kind === "dong" && it.subType === "ilbangu") {
+    const kids = ilbanguChildren[`${it.parentSlug}/${it.slug}`] || [];
+    if (kids.length) {
+      dongChips = section({
+        tint: true, h2: "대표 행정동 바로가기",
+        inner: chips(kids.map((d) => ({ label: d.name, href: `${P.base}${it.parentSlug}/${d.slug}/` }))),
+      });
+    }
   }
 
   const charCount = plainLen(it.sections.map((s) => s.html).join(" "));
@@ -967,6 +977,10 @@ async function buildRegion(P, report) {
 
   const dongByGu = {};
   items.filter((it) => it.kind === "dong").forEach((it) => { (dongByGu[it.parentSlug] ||= []).push({ name: it.name, slug: it.slug, subType: it.subType }); });
+  // 일반구 → 자식 행정동 매핑(ilbangu 필드 기준)
+  const ilbanguChildren = {};
+  items.filter((it) => it.kind === "dong" && it.subType !== "ilbangu" && it.ilbangu)
+    .forEach((it) => { (ilbanguChildren[`${it.parentSlug}/${it.ilbangu}`] ||= []).push({ name: it.name, slug: it.slug }); });
 
   const valid = new Set([P.base, `${P.base}life/`, `${P.base}station/`]);
   P.facts.gu.forEach((g) => valid.add(`${P.base}${g.slug}/`));
@@ -975,7 +989,7 @@ async function buildRegion(P, report) {
   const filterRel = makeFilterRelated(P, valid);
 
   for (const it of items) {
-    const r = registerRegionContent(P, it, filterRel, dongByGu);
+    const r = registerRegionContent(P, it, filterRel, dongByGu, ilbanguChildren);
     report.push({ ...r, kind: it.kind, name: it.name });
   }
 }
