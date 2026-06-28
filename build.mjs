@@ -825,10 +825,13 @@ function registerRegionContent(P, it, filterRel, dongByGu) {
 
   let dongChips = "";
   if (it.kind === "gu" && dongByGu[it.slug] && dongByGu[it.slug].length) {
-    dongChips = section({
-      tint: true, h2: "대표 행정동 바로가기",
-      inner: chips(dongByGu[it.slug].map((d) => ({ label: d.name, href: `${P.base}${it.slug}/${d.slug}/` }))),
-    });
+    const subs = dongByGu[it.slug];
+    const ilbangu = subs.filter((s) => s.subType === "ilbangu");
+    const dongs = subs.filter((s) => s.subType !== "ilbangu");
+    const mk = (arr) => chips(arr.map((d) => ({ label: d.name, href: `${P.base}${it.slug}/${d.slug}/` })));
+    dongChips =
+      (ilbangu.length ? section({ tint: true, h2: "행정구(일반구) 바로가기", inner: mk(ilbangu) }) : "") +
+      (dongs.length ? section({ tint: !ilbangu.length, h2: "대표 행정동 바로가기", inner: mk(dongs) }) : "");
   }
 
   const charCount = plainLen(it.sections.map((s) => s.html).join(" "));
@@ -963,7 +966,7 @@ async function buildRegion(P, report) {
   }
 
   const dongByGu = {};
-  items.filter((it) => it.kind === "dong").forEach((it) => { (dongByGu[it.parentSlug] ||= []).push({ name: it.name, slug: it.slug }); });
+  items.filter((it) => it.kind === "dong").forEach((it) => { (dongByGu[it.parentSlug] ||= []).push({ name: it.name, slug: it.slug, subType: it.subType }); });
 
   const valid = new Set([P.base, `${P.base}life/`, `${P.base}station/`]);
   P.facts.gu.forEach((g) => valid.add(`${P.base}${g.slug}/`));
