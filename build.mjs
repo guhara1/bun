@@ -589,6 +589,12 @@ function plainLen(html) {
   return [...html.replace(/<[^>]+>/g, "").replace(/\s+/g, "")].length;
 }
 
+// 내부링크 앵커를 롱테일 키워드로 보강(지역명 + 출장마사지)
+const toLongtailLink = (r) => ({
+  label: /출장마사지|홈타이|안내|기준|확인/.test(r.label) ? r.label : `${r.label} 출장마사지`,
+  href: r.href,
+});
+
 let seoulDongByGu = {};
 function registerSeoulContent(it) {
   const kind = SEOUL_KIND[it.kind];
@@ -635,7 +641,7 @@ ${dongChips}
 ${faqs ? section({ tint: true, h2: "자주 묻는 질문", inner: faqList(it.faqs.map((f) => ({ q: f.q, a: f.a }))) }) : ""}
 ${priceTable()}
 ${related}
-${longtailTopics()}
+${longtailTopics(relatedLinks.map(toLongtailLink))}
 ${inquiryCta()}`;
 
   register({
@@ -864,7 +870,7 @@ ${dongChips}
 ${faqs ? section({ tint: true, h2: "자주 묻는 질문", inner: faqList(it.faqs.map((f) => ({ q: f.q, a: f.a }))) }) : ""}
 ${priceTable()}
 ${related}
-${longtailTopics()}
+${longtailTopics(relatedLinks.map(toLongtailLink))}
 ${inquiryCta()}`;
 
   register({
