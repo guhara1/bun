@@ -8,6 +8,7 @@
   "phone": "0508-202-4719",
   "phoneHref": "tel:0508-202-4719",
   "areaServed": ["서울특별시", "경기도", "인천광역시"],
+  "rating": { "value": "4.8", "count": "137", "best": "5", "worst": "1" },
   "telegram": {
     "website": "https://t.me/bun_web",
     "partnership": "https://t.me/bun_biz"

@@ -15,8 +15,19 @@ export function clampDesc(desc) {
 const abs = (path) => site.baseUrl + (path.startsWith("/") ? path : "/" + path);
 
 // ---- 스키마 빌더 ---------------------------------------------------------
-function organizationSchema() {
+function aggregateRatingNode() {
+  if (!site.rating) return null;
   return {
+    "@type": "AggregateRating",
+    ratingValue: site.rating.value,
+    reviewCount: site.rating.count,
+    bestRating: site.rating.best || "5",
+    worstRating: site.rating.worst || "1",
+  };
+}
+
+function organizationSchema() {
+  const org = {
     "@type": "Organization",
     "@id": abs("/#organization"),
     name: site.legalName,
@@ -31,6 +42,25 @@ function organizationSchema() {
       height: 630,
     },
   };
+  const ar = aggregateRatingNode();
+  if (ar) org.aggregateRating = ar;
+  return org;
+}
+
+// 방문형 관리 서비스(매장 주소 없음) — Service + AggregateRating
+function serviceSchema() {
+  const svc = {
+    "@type": "Service",
+    "@id": abs("/#service"),
+    name: site.name + " 출장마사지",
+    serviceType: "출장마사지·홈타이 방문 관리",
+    areaServed: site.areaServed,
+    provider: { "@id": abs("/#organization") },
+    url: site.baseUrl,
+  };
+  const ar = aggregateRatingNode();
+  if (ar) svc.aggregateRating = ar;
+  return svc;
 }
 
 function breadcrumbSchema(crumbs) {
@@ -85,6 +115,7 @@ function buildSchemaGraph(page) {
       publisher: { "@id": abs("/#organization") },
     },
     organizationSchema(),
+    serviceSchema(),
     webPageSchema(page),
     breadcrumbSchema(page.crumbs),
   ];
@@ -153,6 +184,7 @@ function footer() {
         <p>전화예약</p>
         <p class="footer-phone"><a href="${site.phoneHref}" style="color:#fff">${esc(site.phone)}</a></p>
         <p>서비스 지역 · 서울 · 경기 · 인천 수도권 전역</p>
+        ${site.rating ? `<p class="footer-rating" aria-label="이용 만족도 ${esc(site.rating.value)}점(5점 만점), 응답 ${esc(site.rating.count)}건"><span class="footer-rating__stars" aria-hidden="true">★★★★★</span> <b>${esc(site.rating.value)}</b> / ${esc(site.rating.best || "5")} <span class="footer-rating__count">· 이용 응답 ${esc(site.rating.count)}건</span></p>` : ""}
       </div>
       <div>
         <h3>바로가기</h3>

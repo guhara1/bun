@@ -391,6 +391,10 @@ li { margin-bottom: 0.35em; }
 .footer-biz p { color: var(--c-text-invert-muted); font-size: var(--fs-sm); margin-bottom: var(--sp-2); }
 .footer-biz b { color: #fff; }
 .footer-phone { font-size: var(--fs-lg); font-weight: 800; color: #fff; }
+.footer-rating { display: flex; align-items: center; gap: 0.4em; flex-wrap: wrap; margin-top: var(--sp-2); }
+.footer-rating__stars { color: var(--c-gold-2); letter-spacing: 1px; }
+.footer-rating b { color: #fff; font-size: var(--fs-md); }
+.footer-rating__count { color: var(--c-text-invert-muted); font-size: var(--fs-xs); }
 .footer-bottom {
   margin-top: var(--sp-7); padding-top: var(--sp-5); border-top: 1px solid var(--c-line-invert);
   display: flex; flex-wrap: wrap; gap: var(--sp-3); justify-content: space-between;
