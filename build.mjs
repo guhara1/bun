@@ -506,12 +506,55 @@ function buildSitemap() {
   return xml;
 }
 
-const ROBOTS = `User-agent: *
+const ROBOTS = `# robots.txt — ${site.name}
+User-agent: *
 Allow: /
 Disallow: /404.html
 
+# 네이버
+User-agent: Yeti
+Allow: /
+
+# 구글
+User-agent: Googlebot
+Allow: /
+
+# 빙 (IndexNow)
+User-agent: Bingbot
+Allow: /
+
 Sitemap: ${site.baseUrl}/sitemap.xml
 `;
+
+// RSS 2.0 피드(색인 촉진용) — 색인 대상 페이지 목록
+function buildRss(buildDate) {
+  const items = pages
+    .filter((p) => !p.noindex && !p.path.endsWith(".html"))
+    .sort((a, b) => b.priority - a.priority)
+    .map((p) => {
+      const url = site.baseUrl + p.path;
+      const title = (p.html.match(/<title>([^<]*)<\/title>/) || [])[1] || site.name;
+      return `    <item>
+      <title>${title}</title>
+      <link>${url}</link>
+      <guid isPermaLink="true">${url}</guid>
+      <pubDate>${buildDate}</pubDate>
+    </item>`;
+    })
+    .join("\n");
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>${site.name} — 서울·경기·인천 출장마사지 안내</title>
+    <link>${site.baseUrl}/</link>
+    <description>${site.tagline}</description>
+    <language>ko</language>
+    <lastBuildDate>${buildDate}</lastBuildDate>
+${items}
+  </channel>
+</rss>
+`;
+}
 
 const OG_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><defs><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#221c18"/><stop offset="1" stop-color="#161210"/></linearGradient><linearGradient id="o" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8a2b"/><stop offset="1" stop-color="#cf4708"/></linearGradient></defs><rect width="1200" height="630" fill="url(#b)"/><circle cx="1050" cy="80" r="320" fill="url(#o)" opacity="0.18"/><rect x="80" y="250" width="64" height="64" rx="16" fill="url(#o)"/><text x="170" y="298" font-family="Pretendard, sans-serif" font-size="44" font-weight="800" fill="#fff">Bun 마사지</text><text x="80" y="400" font-family="Pretendard, sans-serif" font-size="56" font-weight="800" fill="#fff">서울·경기·인천 출장마사지</text><text x="80" y="470" font-family="Pretendard, sans-serif" font-size="40" font-weight="600" fill="#c2a062">수도권 지역별 질문 안내</text><text x="80" y="545" font-family="Pretendard, sans-serif" font-size="32" fill="#c5bcae">전화예약 0508-202-4719</text></svg>`;
 
@@ -1054,6 +1097,11 @@ async function main() {
   await writeFile(join(OUT, "assets/favicon.svg"), FAVICON_SVG, "utf8");
   await writeFile(join(OUT, "sitemap.xml"), buildSitemap(), "utf8");
   await writeFile(join(OUT, "robots.txt"), ROBOTS, "utf8");
+  await writeFile(join(OUT, "rss.xml"), buildRss(new Date().toUTCString()), "utf8");
+  // IndexNow 키 파일 (빙·네이버 즉시 색인 통보용)
+  if (site.indexNowKey) {
+    await writeFile(join(OUT, `${site.indexNowKey}.txt`), site.indexNowKey, "utf8");
+  }
 
   const indexed = pages.filter((p) => !p.noindex && !p.path.endsWith(".html")).length;
   const noindexed = pages.filter((p) => p.noindex).length;

@@ -1,5 +1,18 @@
+# robots.txt — Bun 마사지
 User-agent: *
 Allow: /
 Disallow: /404.html
 
-Sitemap: https://bun-massage.example/sitemap.xml
+# 네이버
+User-agent: Yeti
+Allow: /
+
+# 구글
+User-agent: Googlebot
+Allow: /
+
+# 빙 (IndexNow)
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://bun-559.pages.dev/sitemap.xml

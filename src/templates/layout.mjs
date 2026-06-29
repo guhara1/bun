@@ -224,7 +224,10 @@ export function renderPage(page) {
 <title>${esc(page.title)}</title>
 <meta name="description" content="${esc(description)}">
 <meta name="robots" content="${robots}">
+${site.verification && site.verification.naver ? `<meta name="naver-site-verification" content="${site.verification.naver}">` : ""}
+${site.verification && site.verification.google ? `<meta name="google-site-verification" content="${site.verification.google}">` : ""}
 <link rel="canonical" href="${canonical}">
+<link rel="alternate" type="application/rss+xml" title="${esc(site.name)} 업데이트" href="${site.baseUrl}/rss.xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="${esc(site.name)}">
 <meta property="og:locale" content="${site.locale}">

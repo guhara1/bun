@@ -3,12 +3,14 @@
   "shortName": "Bun",
   "legalName": "Bun 마사지",
   "tagline": "서울·경기·인천 출장마사지 · 수도권 지역별 질문 안내",
-  "baseUrl": "https://bun-massage.example",
+  "baseUrl": "https://bun-559.pages.dev",
   "locale": "ko_KR",
   "phone": "0508-202-4719",
   "phoneHref": "tel:0508-202-4719",
   "areaServed": ["서울특별시", "경기도", "인천광역시"],
   "rating": { "value": "4.8", "count": "137", "best": "5", "worst": "1" },
+  "verification": { "naver": "e722654381ff0acec576550874cc9a33c310c5d5" },
+  "indexNowKey": "d971d3d4f35bbcac155e0e347a4eacac",
   "telegram": {
     "website": "https://t.me/bun_web",
     "partnership": "https://t.me/bun_biz"
